@@ -1,28 +1,27 @@
 import React, { Component, Fragment } from 'react';
-import {BrowserRouter  as Router, Route} from 'react-router-dom';
+import {BrowserRouter  as Router, Route, Link} from 'react-router-dom';
 import MovieSearch from '../MovieSearch/MovieSearch';
 import MoviesList from '../MovieList/MoviesList';
 import MovieItem from '../MovieItem/MovieItem';
+import Error from '../Error/Error';
 
 import Api from '../../api/api';
 
-import Error from '../Error/Error';
 import 'normalize.css';
 import './app.sass';
 
 export default class App extends Component {
-	url = 'https://www.omdbapi.com/?apikey=e99e23f5&s=';
 	movieApi = new Api();
 
 	state = {
 		movies: [],
+		favorites: [],
 		movie: null,
 		isError: false
 	};
-
 	updateMoviesList = (movies) => {
 		this.setState({
-			movies: movies,
+			movies,
 			isError: false
 		});
 	};
@@ -48,22 +47,50 @@ export default class App extends Component {
 			}
 		})
 	};
+	addToFavorites = (movie) => {
+		this.setState({
+			favorites: [...this.state.favorites, movie]
+		});
+	};
+	findMovieInFavorites = (movie) => {
+		return this.state.favorites.findIndex((item) => {
+			return item === movie
+		});
+	};
+	removeMovieFromFavorites = (id) => {
+		const index = this.findMovieInFavorites(id);
+		let newFavoriteList = this.state.favorites.slice();
+		newFavoriteList.splice(index, 1);
+		this.setState({
+			favorites: newFavoriteList
+		})
+	};
   render() {
 		const error = this.state.isError ? <Error /> : null;
     return (
     	<Router>
 				<Fragment>
 						<MovieSearch  movieSearch={this.movieSearch} />
+						<Link to="/favorites">Favorites</Link>
 						<Route path="/" exact render={() => {
 							return <MoviesList
 								getId={this.getMovie}
 								moviesList={this.state.movies}/>
 						}} />
+					<Route path="/favorites" render={() => {
+						return <MoviesList
+							getId={this.getMovie}
+							moviesList={this.state.favorites}/>
+					}} />
 						{error}
 						<Route
 							path="/movies/:id"
 							render={() => (
-								<MovieItem movie={this.state.movie}/>
+								<MovieItem
+									addToFavorites={this.addToFavorites}
+									removeMovieFromFavorites={this.removeMovieFromFavorites}
+									findMovieInFavorites={this.findMovieInFavorites}
+									movie={this.state.movie}/>
 							)}
 					 	/>
 				</Fragment>
