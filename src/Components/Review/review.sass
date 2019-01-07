@@ -1,0 +1,22 @@
+.review
+  display: flex
+  flex-direction: column
+  align-items: center
+.review__body
+  width: 50%
+  min-height: 50px
+  padding: 10px
+  border: 1px solid  rgba(255, 255, 255, 0.4)
+  background-color: rgba(255, 255, 255, 0.1)
+  border-radius: 5px
+  resize: none
+  color: #fff
+  font-size: 16px
+  letter-spacing: 0.7px
+  transition: 0.3s ease
+  &:focus
+    width: 100%
+    color: #000
+    background-color: #fff
+.review__body::placeholder
+  color: #fff
