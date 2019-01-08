@@ -25,10 +25,8 @@ export default class App extends Component {
       isError: false
     });
   };
-  getMovie = id => {
-    const movieId = this.state.movies.findIndex(movie => {
-      return movie.imdbID === id;
-    });
+  getMovieById = movie => {
+    const movieId = this.findMovieId("movies", movie);
     this.setState({
       movie: this.state.movies[movieId]
     });
@@ -38,50 +36,41 @@ export default class App extends Component {
       isError: true
     });
   };
-  movieSearch = movie => {
+  searchMoviesInAPi = movie => {
     this.movieApi.getMovieList(movie).then(item => {
-      if (item) {
-        this.updateMoviesList(item);
-      } else {
-        this.showError();
-      }
+      item ? this.updateMoviesList(item) : this.showError();
     });
   };
-  addToFavorites = movie => {
+  addMovieToFavorites = movie => {
     this.setState(({ favorites }) => {
-      const newList = [...favorites, movie];
       return {
-        favorites: newList
+        favorites: [...favorites, movie]
       };
     });
   };
-  findMovieInFavorites = movie => {
-    return this.state.favorites.findIndex(item => {
+  findMovieId = (list, movie) => {
+    return this.state[list].findIndex(item => {
       return item.imdbID === movie.imdbID;
     });
   };
-  removeMovieFromFavorites = id => {
+  removeMovieFromFavorites = movie => {
     this.setState(({ favorites }) => {
-      const index = this.findMovieInFavorites(id);
-      let newFavoriteList = favorites.slice();
-      newFavoriteList.splice(index, 1);
       return {
-        favorites: newFavoriteList
+        favorites: favorites.filter(mov => mov !== movie)
       };
     });
   };
   addReview = (review, movie) => {
-    const id = this.findMovieInFavorites(movie);
     movie.review = review;
-    this.removeMovieFromFavorites(id);
-    this.addToFavorites(movie);
+    this.removeMovieFromFavorites(movie);
+    this.addMovieToFavorites(movie);
   };
   render() {
     const error = this.state.isError ? <Error /> : null;
     return (
       <Router>
         <Fragment>
-          <MovieSearch movieSearch={this.movieSearch} />
+          <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />
           <Link to="/favorites">Favorites</Link>
           <Link to="/">Home</Link>
           <Route
@@ -90,7 +79,7 @@ export default class App extends Component {
             render={() => {
               return (
                 <MoviesList
-                  getId={this.getMovie}
+                  getMovieById={this.getMovieById}
                   moviesList={this.state.movies}
                 />
               );
@@ -101,7 +90,7 @@ export default class App extends Component {
             render={() => {
               return (
                 <MoviesList
-                  getId={this.getMovie}
+                  getMovieById={this.getMovieById}
                   moviesList={this.state.favorites}
                 />
               );
@@ -113,9 +102,9 @@ export default class App extends Component {
             render={() => (
               <MovieItem
                 addReview={this.addReview}
-                addToFavorites={this.addToFavorites}
+                addMovieToFavorites={this.addMovieToFavorites}
                 removeMovieFromFavorites={this.removeMovieFromFavorites}
-                findMovieInFavorites={this.findMovieInFavorites}
+                findMovieId={this.findMovieId}
                 movie={this.state.movie}
               />
             )}

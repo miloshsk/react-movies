@@ -12,7 +12,7 @@ export default class MoviesSearch extends Component {
   };
   searchMovie = e => {
     e.preventDefault();
-    this.props.movieSearch(this.state.searchingMovie);
+    this.props.searchMoviesInAPi(this.state.searchingMovie);
     this.setState({
       searchingMovie: ""
     });

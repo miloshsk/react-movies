@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1161aa8-4843-471e-9208-137eea09f274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/Review/Review.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Review/review.sass" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/App/app.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/App/app.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Error/Error.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Error/Error.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/MovieItem/MovieItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MovieItem/MovieItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/MovieItem/movie-item.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MovieItem/movie-item.sass" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/MovieList/MoviesList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MovieList/MoviesList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/MovieSearch/MovieSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MovieSearch/MovieSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/MovieSearch/movie-search.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MovieSearch/movie-search.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,20 +21,21 @@
     <session id="1162505609">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.133" value="1" />
           <entry key="project.open.time.161" value="1" />
           <entry key="project.open.time.168" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.39" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.open.time.58" value="1" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="js" value="40" />
+          <entry key="js" value="52" />
           <entry key="json" value="4" />
           <entry key="sass" value="18" />
         </counts>
@@ -51,26 +43,26 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="40" />
+          <entry key="JavaScript" value="52" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Sass" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="ESLintLanguageService" value="6" />
-          <entry key="PrettierLanguageServiceImpl" value="1" />
+          <entry key="ESLintLanguageService" value="7" />
+          <entry key="PrettierLanguageServiceImpl" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="4602" />
+          <entry key="js" value="5693" />
           <entry key="sass" value="342" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="4602" />
+          <entry key="JavaScript" value="5693" />
           <entry key="Sass" value="342" />
         </counts>
       </usages-collector>
@@ -78,11 +70,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Components/Review/Review.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/App/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+            <state relative-caret-position="-340">
+              <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+              <folding>
+                <element signature="e#474#550#0" />
+                <element signature="e#1447#1581#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/MovieItem/MovieItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/MovieList/MoviesList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -110,13 +127,13 @@
         <option value="$PROJECT_DIR$/src/Components/App/app.sass" />
         <option value="$PROJECT_DIR$/src/Components/Review/review.sass" />
         <option value="$PROJECT_DIR$/src/Components/MovieItem/movie-item.sass" />
+        <option value="$PROJECT_DIR$/src/Components/Error/Error.js" />
+        <option value="$PROJECT_DIR$/src/Components/Review/Review.js" />
+        <option value="$PROJECT_DIR$/src/Components/MovieSearch/MovieSearch.js" />
+        <option value="$PROJECT_DIR$/src/api/api.js" />
+        <option value="$PROJECT_DIR$/src/Components/MovieList/MoviesList.js" />
         <option value="$PROJECT_DIR$/src/Components/App/App.js" />
         <option value="$PROJECT_DIR$/src/Components/MovieItem/MovieItem.js" />
-        <option value="$PROJECT_DIR$/src/Components/MovieList/MoviesList.js" />
-        <option value="$PROJECT_DIR$/src/Components/Error/Error.js" />
-        <option value="$PROJECT_DIR$/src/api/api.js" />
-        <option value="$PROJECT_DIR$/src/Components/MovieSearch/MovieSearch.js" />
-        <option value="$PROJECT_DIR$/src/Components/Review/Review.js" />
       </list>
     </option>
   </component>
@@ -137,8 +154,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="45" />
-    <option name="y" value="146" />
+    <option name="x" value="-11" />
+    <option name="y" value="352" />
     <option name="width" value="1608" />
     <option name="height" value="599" />
   </component>
@@ -150,7 +167,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,6 +188,12 @@
               <item name="react-movies" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-movies" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="react-movies" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-movies" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -179,12 +201,20 @@
               <item name="react-movies" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
-              <item name="Review" type="462c0819:PsiDirectoryNode" />
+              <item name="MovieItem" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="react-movies" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-movies" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="MovieList" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -226,12 +256,13 @@
       <workItem from="1546790805358" duration="7888000" />
       <workItem from="1546802576009" duration="2434000" />
       <workItem from="1546874274377" duration="12133000" />
-      <workItem from="1546892336696" duration="4767000" />
+      <workItem from="1546892336696" duration="4995000" />
+      <workItem from="1546940668268" duration="8839000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28857000" />
+    <option name="totallyTimeSpent" value="37924000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,13 +332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../todo/src/components/app/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/MovieList/movie-list.sass">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -331,42 +355,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../movies-app/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../movies-app/package.json" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-132" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/App/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="93" column="48" lean-forward="true" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Error/Error.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -384,26 +382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/MovieItem/MovieItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/MovieList/MoviesList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/MovieSearch/movie-search.sass">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="428">
@@ -411,20 +389,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/MovieSearch/MovieSearch.js">
+    <entry file="file://$PROJECT_DIR$/src/Components/Review/Review.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        <state relative-caret-position="418">
+          <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Review/Review.js">
+    <entry file="file://$PROJECT_DIR$/../todo/src/components/app/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        <state relative-caret-position="-44">
+          <caret line="37" column="23" lean-forward="true" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/MovieSearch/MovieSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/MovieList/MoviesList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/App/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+          <folding>
+            <element signature="e#474#550#0" />
+            <element signature="e#1447#1581#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/MovieItem/MovieItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

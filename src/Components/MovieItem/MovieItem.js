@@ -8,7 +8,7 @@ export default class MovieItem extends Component {
     switch (e.target.textContent) {
       case "Fav":
         e.target.innerText = "Unfav";
-        this.props.addToFavorites(this.props.movie);
+        this.props.addMovieToFavorites(this.props.movie);
         break;
       case "Unfav":
         e.target.innerText = "Fav";
@@ -24,7 +24,7 @@ export default class MovieItem extends Component {
   render() {
     const { Title, Year, Poster, review } = this.props.movie;
     const movieInFavorites =
-      this.props.findMovieInFavorites(this.props.movie) === -1;
+      this.props.findMovieId("favorites", this.props.movie) === -1;
     const btnText = movieInFavorites ? "Fav" : "Unfav";
     const showReview =
       !movieInFavorites && !review ? (
