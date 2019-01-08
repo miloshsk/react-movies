@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
 import MovieSearch from "../MovieSearch/MovieSearch";
 import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
@@ -70,15 +70,50 @@ export default class App extends Component {
     return (
       <Router>
         <Fragment>
-          <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />
-          <Link to="/favorites">Favorites</Link>
-          <Link to="/">Home</Link>
+          <ul className="menu">
+						<li>
+							<NavLink
+								exact
+								activeClassName="btn-active"
+								className="btn"
+								to="/"
+							>
+								Home
+							</NavLink>
+						</li>
+            <li>
+              <NavLink
+                activeClassName="btn-active"
+                className="btn"
+                to="/movies"
+              >
+                Movies
+              </NavLink>
+            </li>
+						<li>
+							<NavLink
+								activeClassName="btn-active"
+								className="btn"
+								to="/favorites"
+							>
+								Favorites
+							</NavLink>
+						</li>
+          </ul>
           <Route
             path="/"
             exact
             render={() => {
+              return <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />;
+            }}
+          />
+          <Route
+            path="/movies"
+            exact
+            render={() => {
               return (
                 <MoviesList
+                  list={"movies"}
                   getMovieById={this.getMovieById}
                   moviesList={this.state.movies}
                 />
@@ -87,9 +122,11 @@ export default class App extends Component {
           />
           <Route
             path="/favorites"
+            exact
             render={() => {
               return (
                 <MoviesList
+                  list={"favorites"}
                   getMovieById={this.getMovieById}
                   moviesList={this.state.favorites}
                 />
@@ -98,16 +135,19 @@ export default class App extends Component {
           />
           {error}
           <Route
-            path="/movies/:id"
-            render={() => (
-              <MovieItem
-                addReview={this.addReview}
-                addMovieToFavorites={this.addMovieToFavorites}
-                removeMovieFromFavorites={this.removeMovieFromFavorites}
-                findMovieId={this.findMovieId}
-                movie={this.state.movie}
-              />
-            )}
+            path="/:list/:id"
+            exact
+            render={() => {
+              return (
+                <MovieItem
+                  addReview={this.addReview}
+                  addMovieToFavorites={this.addMovieToFavorites}
+                  removeMovieFromFavorites={this.removeMovieFromFavorites}
+                  findMovieId={this.findMovieId}
+                  movie={this.state.movie}
+                />
+              );
+            }}
           />
         </Fragment>
       </Router>

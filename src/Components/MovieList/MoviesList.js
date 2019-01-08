@@ -4,17 +4,15 @@ import "./movie-list.sass";
 
 export default class MoviesList extends Component {
   createList = () => {
-    const { moviesList, getMovieById } = this.props;
+    const { moviesList, getMovieById, list } = this.props;
     return moviesList.map(movie => {
       const { imdbID, Title } = movie;
       return (
         <li className="movie-item" key={imdbID}>
           <h2 className="movie-item-title">{Title}</h2>
           <Link
-            onClick={() => {
-              return getMovieById(movie);
-            }}
-            to={`/movies/${imdbID}`}
+            onClick={() => getMovieById(movie)}
+            to={`/${list}/${imdbID}`}
             className="movie-info"
           >
             +
@@ -25,6 +23,6 @@ export default class MoviesList extends Component {
   };
   render() {
     const list = this.createList();
-    return <ul className="movie-list">{list}</ul>;
+    return <ul className="movie-list">{list}</ul>
   }
 }

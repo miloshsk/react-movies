@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import "./movie-search.sass";
 
-export default class MoviesSearch extends Component {
+class MoviesSearch extends Component {
   state = {
     searchingMovie: ""
   };
@@ -16,6 +17,7 @@ export default class MoviesSearch extends Component {
     this.setState({
       searchingMovie: ""
     });
+		this.props.history.push('/movies');
   };
   render() {
     return (
@@ -32,3 +34,4 @@ export default class MoviesSearch extends Component {
     );
   }
 }
+export default withRouter(MoviesSearch);
