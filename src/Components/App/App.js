@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import MovieSearch from "../MovieSearch/MovieSearch";
 import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
-import Error from "../Error/Error";
 import Navigation from "../Navigation/Navigation";
 
 import Api from "../../api/api";
@@ -26,20 +25,23 @@ export default class App extends Component {
       isError: false
     });
   };
+  clearMoviesList = () => {
+    this.setState(() => {
+      return {
+        movies: [],
+				isError: true
+      }
+    })
+  };
   getMovieById = movie => {
     const movieId = this.findMovieId("movies", movie);
     this.setState({
       movie: this.state.movies[movieId]
     });
   };
-  showError = () => {
-    this.setState({
-      isError: true
-    });
-  };
   searchMoviesInAPi = movie => {
     this.movieApi.getMovieList(movie).then(item => {
-      item ? this.updateMoviesList(item) : this.showError();
+      item ? this.updateMoviesList(item) : this.clearMoviesList()
     });
   };
   addMovieToFavorites = movie => {
@@ -67,7 +69,6 @@ export default class App extends Component {
     this.addMovieToFavorites(movie);
   };
   render() {
-    const error = this.state.isError ? <Error /> : null;
     return (
       <Router>
         <Fragment>
@@ -79,11 +80,13 @@ export default class App extends Component {
               <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />
             )}
           />
+          <Route path="/error" />
           <Route
             path="/movies"
             exact
             render={() => (
               <MoviesList
+                error={this.state.isError}
                 list={"movies"}
                 getMovieById={this.getMovieById}
                 moviesList={this.state.movies}
@@ -95,13 +98,13 @@ export default class App extends Component {
             exact
             render={() => (
               <MoviesList
+                error={false}
                 list={"favorites"}
                 getMovieById={this.getMovieById}
                 moviesList={this.state.favorites}
               />
             )}
           />
-          {error}
           <Route
             path="/:list/:id"
             exact

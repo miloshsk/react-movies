@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./error.sass";
-export default class Error extends Component {
-  render() {
-    return <h1 className="error">Something Wrong</h1>;
-  }
-}
+const Error = () => {
+  return <h2 className="error">No result!</h2>;
+};
+export default Error;

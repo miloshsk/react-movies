@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import Error from "../Error/Error";
 import "./movie-list.sass";
 
 export default class MoviesList extends Component {
@@ -22,7 +23,21 @@ export default class MoviesList extends Component {
     });
   };
   render() {
-    const list = this.createList();
-    return <ul className="movie-list">{list}</ul>;
+    const movies = this.createList();
+    const { list, moviesList, error } = this.props;
+    return (
+      <Fragment>
+        {error ? (
+          <Error />
+        ) : (
+          <div>
+            <h2 style={{ textAlign: "center" }}>
+              {moviesList.length} movies in {list}
+            </h2>
+            <ul className="movie-list">{movies}</ul>
+          </div>
+        )}
+      </Fragment>
+    );
   }
 }
