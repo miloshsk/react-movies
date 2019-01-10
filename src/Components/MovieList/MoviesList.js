@@ -23,6 +23,6 @@ export default class MoviesList extends Component {
   };
   render() {
     const list = this.createList();
-    return <ul className="movie-list">{list}</ul>
+    return <ul className="movie-list">{list}</ul>;
   }
 }

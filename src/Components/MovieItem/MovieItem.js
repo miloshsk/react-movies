@@ -20,6 +20,9 @@ export default class MovieItem extends Component {
   addReview = (review, movie) => {
     this.props.addReview(review, movie);
   };
+  goBack = () => {
+    this.props.history.push(`/${this.props.match.params.list}`);
+  };
   render() {
     const { Title, Year, Poster, review } = this.props.movie;
     const movieIsNotFavorite =
@@ -37,7 +40,10 @@ export default class MovieItem extends Component {
         <h2 className="movie__title">{Title}</h2>
         <p className="movie__year">{Year}</p>
         <img className="movie__poster" src={Poster} alt="" />
-        <button onClick={this.addToFavorites} className="btn btn__favorites">
+        <button className="btn btn-return" onClick={this.goBack}>
+          Back
+        </button>
+        <button onClick={this.addToFavorites} className="btn btn-favorites">
           {btnText}
         </button>
         {showReview}

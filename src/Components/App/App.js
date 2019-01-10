@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import MovieSearch from "../MovieSearch/MovieSearch";
 import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
 import Error from "../Error/Error";
+import Navigation from "../Navigation/Navigation";
 
 import Api from "../../api/api";
 
@@ -70,84 +71,50 @@ export default class App extends Component {
     return (
       <Router>
         <Fragment>
-          <ul className="menu">
-						<li>
-							<NavLink
-								exact
-								activeClassName="btn-active"
-								className="btn"
-								to="/"
-							>
-								Home
-							</NavLink>
-						</li>
-            <li>
-              <NavLink
-                activeClassName="btn-active"
-                className="btn"
-                to="/movies"
-              >
-                Movies
-              </NavLink>
-            </li>
-						<li>
-							<NavLink
-								activeClassName="btn-active"
-								className="btn"
-								to="/favorites"
-							>
-								Favorites
-							</NavLink>
-						</li>
-          </ul>
+          <Navigation />
           <Route
             path="/"
             exact
-            render={() => {
-              return <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />;
-            }}
+            render={() => (
+              <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />
+            )}
           />
           <Route
             path="/movies"
             exact
-            render={() => {
-              return (
-                <MoviesList
-                  list={"movies"}
-                  getMovieById={this.getMovieById}
-                  moviesList={this.state.movies}
-                />
-              );
-            }}
+            render={() => (
+              <MoviesList
+                list={"movies"}
+                getMovieById={this.getMovieById}
+                moviesList={this.state.movies}
+              />
+            )}
           />
           <Route
             path="/favorites"
             exact
-            render={() => {
-              return (
-                <MoviesList
-                  list={"favorites"}
-                  getMovieById={this.getMovieById}
-                  moviesList={this.state.favorites}
-                />
-              );
-            }}
+            render={() => (
+              <MoviesList
+                list={"favorites"}
+                getMovieById={this.getMovieById}
+                moviesList={this.state.favorites}
+              />
+            )}
           />
           {error}
           <Route
             path="/:list/:id"
             exact
-            render={() => {
-              return (
-                <MovieItem
-                  addReview={this.addReview}
-                  addMovieToFavorites={this.addMovieToFavorites}
-                  removeMovieFromFavorites={this.removeMovieFromFavorites}
-                  findMovieId={this.findMovieId}
-                  movie={this.state.movie}
-                />
-              );
-            }}
+            render={props => (
+              <MovieItem
+                {...props}
+                addReview={this.addReview}
+                addMovieToFavorites={this.addMovieToFavorites}
+                removeMovieFromFavorites={this.removeMovieFromFavorites}
+                findMovieId={this.findMovieId}
+                movie={this.state.movie}
+              />
+            )}
           />
         </Fragment>
       </Router>
