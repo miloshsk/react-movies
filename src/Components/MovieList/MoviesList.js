@@ -5,8 +5,9 @@ import "./movie-list.sass";
 
 export default class MoviesList extends Component {
   createList = () => {
-    const { moviesList, getMovieById, list } = this.props;
-    return moviesList.map(movie => {
+    const { list } = this.props.match.params;
+    const { moviesList, getMovieById } = this.props;
+    return moviesList[list].map(movie => {
       const { imdbID, Title } = movie;
       return (
         <li className="movie-item" key={imdbID}>
@@ -24,7 +25,8 @@ export default class MoviesList extends Component {
   };
   render() {
     const movies = this.createList();
-    const { list, moviesList, error } = this.props;
+    const { list } = this.props.match.params;
+    const { moviesList, error } = this.props;
     return (
       <Fragment>
         {error ? (
@@ -32,7 +34,7 @@ export default class MoviesList extends Component {
         ) : (
           <div>
             <h2 style={{ textAlign: "center" }}>
-              {moviesList.length} movies in {list}
+              {moviesList[list].length} movies in {this.props.match.params.list}
             </h2>
             <ul className="movie-list">{movies}</ul>
           </div>

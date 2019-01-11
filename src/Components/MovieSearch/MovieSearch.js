@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import "./movie-search.sass";
 
 class MoviesSearch extends Component {
@@ -17,7 +17,7 @@ class MoviesSearch extends Component {
     this.setState({
       searchingMovie: ""
     });
-		this.props.history.push('/movies');
+    this.props.history.push("/movies");
   };
   render() {
     return (

@@ -29,9 +29,9 @@ export default class App extends Component {
     this.setState(() => {
       return {
         movies: [],
-				isError: true
-      }
-    })
+        isError: true
+      };
+    });
   };
   getMovieById = movie => {
     const movieId = this.findMovieId("movies", movie);
@@ -41,7 +41,7 @@ export default class App extends Component {
   };
   searchMoviesInAPi = movie => {
     this.movieApi.getMovieList(movie).then(item => {
-      item ? this.updateMoviesList(item) : this.clearMoviesList()
+      item ? this.updateMoviesList(item) : this.clearMoviesList();
     });
   };
   addMovieToFavorites = movie => {
@@ -82,26 +82,14 @@ export default class App extends Component {
           />
           <Route path="/error" />
           <Route
-            path="/movies"
+            path="/:list"
             exact
-            render={() => (
+            render={(props) => (
               <MoviesList
+								{...props}
                 error={this.state.isError}
-                list={"movies"}
                 getMovieById={this.getMovieById}
-                moviesList={this.state.movies}
-              />
-            )}
-          />
-          <Route
-            path="/favorites"
-            exact
-            render={() => (
-              <MoviesList
-                error={false}
-                list={"favorites"}
-                getMovieById={this.getMovieById}
-                moviesList={this.state.favorites}
+                moviesList={this.state}
               />
             )}
           />
