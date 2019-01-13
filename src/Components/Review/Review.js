@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./review.sass";
+import connect from "react-redux/es/connect/connect";
+import { addReview } from "../../actions/actions";
 
-export default class Review extends Component {
+class Review extends Component {
   state = {
     reviewText: ""
   };
@@ -13,6 +15,9 @@ export default class Review extends Component {
   sendReview = e => {
     e.preventDefault();
     this.props.addReview(this.state.reviewText, this.props.getMovie);
+    this.setState({
+      reviewText: ""
+    });
   };
   render() {
     return (
@@ -32,3 +37,8 @@ export default class Review extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  { addReview }
+)(Review);

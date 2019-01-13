@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import "./movie-search.sass";
+import { connect } from "react-redux";
+import { fetchMovies } from "../../actions/actions";
 
 class MoviesSearch extends Component {
   state = {
@@ -13,7 +15,7 @@ class MoviesSearch extends Component {
   };
   searchMovie = e => {
     e.preventDefault();
-    this.props.searchMoviesInAPi(this.state.searchingMovie);
+    this.props.fetchMovies(this.state.searchingMovie);
     this.setState({
       searchingMovie: ""
     });
@@ -34,4 +36,9 @@ class MoviesSearch extends Component {
     );
   }
 }
-export default withRouter(MoviesSearch);
+export default withRouter(
+  connect(
+    null,
+    { fetchMovies }
+  )(MoviesSearch)
+);

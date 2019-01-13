@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Error from "../Error/Error";
 import "./movie-list.sass";
+import connect from "react-redux/es/connect/connect";
+import { getMovie } from "../../actions/actions";
 
-export default class MoviesList extends Component {
+class MoviesList extends Component {
   createList = (moviesList, getMovieById, list) => {
     return moviesList[list].map(movie => {
       const { imdbID, Title } = movie;
@@ -11,7 +13,7 @@ export default class MoviesList extends Component {
         <li className="movie-item" key={imdbID}>
           <h2 className="movie-item-title">{Title}</h2>
           <Link
-            onClick={() => getMovieById(movie)}
+            onClick={() => this.props.getMovie(movie)}
             to={`/${list}/${imdbID}`}
             className="movie-info"
           >
@@ -23,8 +25,8 @@ export default class MoviesList extends Component {
   };
   render() {
     const { list } = this.props.match.params;
-    const { moviesList, error, getMovieById } = this.props;
-    const movies = this.createList(moviesList, getMovieById, list);
+    const { state, error, getMovieById } = this.props;
+    const movies = this.createList(state, getMovieById, list);
     return (
       <Fragment>
         {error ? (
@@ -32,7 +34,7 @@ export default class MoviesList extends Component {
         ) : (
           <div>
             <h2 style={{ textAlign: "center" }}>
-              {moviesList[list].length} movies in {this.props.match.params.list}
+              {state[list].length} movies in {this.props.match.params.list}
             </h2>
             <ul className="movie-list">{movies}</ul>
           </div>
@@ -41,3 +43,12 @@ export default class MoviesList extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  state: state.movies
+});
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getMovie }
+  )(MoviesList)
+);

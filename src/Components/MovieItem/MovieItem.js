@@ -1,36 +1,45 @@
 import React, { Component } from "react";
 import Review from "../Review/Review";
 import "./movie-item.sass";
+import { withRouter } from "react-router-dom";
+import connect from "react-redux/es/connect/connect";
+import {
+	addFavorites,
+  removeFavorites,
+  addReview
+} from "../../actions/actions";
 
-export default class MovieItem extends Component {
+class MovieItem extends Component {
   addToFavorites = e => {
     switch (e.target.textContent) {
       case "Fav":
         e.target.innerText = "Unfav";
-        this.props.addMovieToFavorites(this.props.movie);
+        this.props.addFavorites(this.props.movie);
         break;
       case "Unfav":
         e.target.innerText = "Fav";
-        this.props.removeMovieFromFavorites(this.props.movie);
+        this.props.removeFavorites(this.props.movie);
         break;
       default:
         return;
     }
   };
-  addReview = (review, movie) => {
-    this.props.addReview(review, movie);
-  };
   goBack = () => {
     this.props.history.push(`/${this.props.match.params.list}`);
   };
+  findInFavorites = movie => {
+    return this.props.favorites.findIndex(item => {
+      return item.imdbID === movie.imdbID;
+    });
+  };
   render() {
-    const { Title, Year, Poster, review } = this.props.movie;
-    const movieIsNotFavorite =
-      this.props.findMovieId("favorites", this.props.movie) === -1;
+    const { movie } = this.props;
+    const { Title, Year, Poster, review } = movie;
+    const movieIsNotFavorite = this.findInFavorites(movie) === -1;
     const btnText = movieIsNotFavorite ? "Fav" : "Unfav";
     const showReview =
       !movieIsNotFavorite && !review ? (
-        <Review getMovie={this.props.movie} addReview={this.addReview} />
+        <Review getMovie={movie} />
       ) : (
         null || <p>{review}</p>
       );
@@ -51,3 +60,13 @@ export default class MovieItem extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  movie: state.movies.movie,
+  favorites: state.movies.favorites
+});
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { addFavorites, removeFavorites, addReview }
+  )(MovieItem)
+);

@@ -5,110 +5,39 @@ import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
 import Navigation from "../Navigation/Navigation";
 
-import Api from "../../api/api";
-
 import "normalize.css";
 import "./app.sass";
 
-export default class App extends Component {
-  movieApi = new Api();
+import { Provider } from "react-redux";
+import store from "../../store";
 
+export default class App extends Component {
   state = {
-    movies: [],
-    favorites: [],
-    movie: null,
     isError: false
-  };
-  updateMoviesList = movies => {
-    this.setState({
-      movies,
-      isError: false
-    });
-  };
-  clearMoviesList = () => {
-    this.setState(() => {
-      return {
-        movies: [],
-        isError: true
-      };
-    });
-  };
-  getMovieById = movie => {
-    const movieId = this.findMovieId("movies", movie);
-    this.setState({
-      movie: this.state.movies[movieId]
-    });
-  };
-  searchMoviesInAPi = movie => {
-    this.movieApi.getMovieList(movie).then(item => {
-      item ? this.updateMoviesList(item) : this.clearMoviesList();
-    });
-  };
-  addMovieToFavorites = movie => {
-    this.setState(({ favorites }) => {
-      return {
-        favorites: [...favorites, movie]
-      };
-    });
-  };
-  findMovieId = (list, movie) => {
-    return this.state[list].findIndex(item => {
-      return item.imdbID === movie.imdbID;
-    });
-  };
-  removeMovieFromFavorites = movie => {
-    this.setState(({ favorites }) => {
-      return {
-        favorites: favorites.filter(mov => mov !== movie)
-      };
-    });
-  };
-  addReview = (review, movie) => {
-    movie.review = review;
-    this.removeMovieFromFavorites(movie);
-    this.addMovieToFavorites(movie);
   };
   render() {
     return (
-      <Router>
-        <Fragment>
-          <Navigation />
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <MovieSearch searchMoviesInAPi={this.searchMoviesInAPi} />
-            )}
-          />
-          <Route path="/error" />
-          <Route
-            path="/:list"
-            exact
-            render={(props) => (
-              <MoviesList
-								{...props}
-                error={this.state.isError}
-                getMovieById={this.getMovieById}
-                moviesList={this.state}
-              />
-            )}
-          />
-          <Route
-            path="/:list/:id"
-            exact
-            render={props => (
-              <MovieItem
-                {...props}
-                addReview={this.addReview}
-                addMovieToFavorites={this.addMovieToFavorites}
-                removeMovieFromFavorites={this.removeMovieFromFavorites}
-                findMovieId={this.findMovieId}
-                movie={this.state.movie}
-              />
-            )}
-          />
-        </Fragment>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Fragment>
+            <Navigation />
+            <Route path="/" exact component={MovieSearch} />
+            <Route path="/error" />
+            <Route
+              path="/:list"
+              exact
+              render={props => (
+                <MoviesList {...props} error={this.state.isError} />
+              )}
+            />
+            <Route
+              path="/:list/:id"
+              exact
+              render={props => <MovieItem {...props} />}
+            />
+          </Fragment>
+        </Router>
+      </Provider>
     );
   }
 }
