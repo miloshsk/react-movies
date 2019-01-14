@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MovieSearch from "../MovieSearch/MovieSearch";
 import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
 import Navigation from "../Navigation/Navigation";
+import Error from "../Error/Error";
 
 import "normalize.css";
 import "./app.sass";
@@ -21,20 +22,37 @@ export default class App extends Component {
         <Router>
           <Fragment>
             <Navigation />
-            <Route path="/" exact component={MovieSearch} />
-            <Route path="/error" />
-            <Route
-              path="/:list"
-              exact
-              render={props => (
-                <MoviesList {...props} error={this.state.isError} />
-              )}
-            />
-            <Route
-              path="/:list/:id"
-              exact
-              render={props => <MovieItem {...props} />}
-            />
+            <Switch>
+              <Route path="/" exact component={MovieSearch} />
+              <Route
+                path="/movies"
+                exact
+                render={props => (
+                  <MoviesList
+                    {...props}
+                    list={"movies"}
+                    error={this.state.isError}
+                  />
+                )}
+              />
+              <Route
+                path="/favorites"
+                exact
+                render={props => (
+                  <MoviesList
+                    {...props}
+                    list={"favorites"}
+                    error={this.state.isError}
+                  />
+                )}
+              />
+              <Route
+                path="/:list/:id"
+                exact
+                render={props => <MovieItem {...props} />}
+              />
+              <Route component={Error} />
+            </Switch>
           </Fragment>
         </Router>
       </Provider>

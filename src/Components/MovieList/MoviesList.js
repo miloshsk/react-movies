@@ -24,8 +24,7 @@ class MoviesList extends Component {
     });
   };
   render() {
-    const { list } = this.props.match.params;
-    const { state, error, getMovieById } = this.props;
+    const { state, error, getMovieById, list } = this.props;
     const movies = this.createList(state, getMovieById, list);
     return (
       <Fragment>
@@ -34,7 +33,7 @@ class MoviesList extends Component {
         ) : (
           <div>
             <h2 style={{ textAlign: "center" }}>
-              {state[list].length} movies in {this.props.match.params.list}
+              {state[list].length} movies in {list}
             </h2>
             <ul className="movie-list">{movies}</ul>
           </div>
