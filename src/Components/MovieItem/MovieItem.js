@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Review from "../Review/Review";
 import "./movie-item.sass";
-import { withRouter } from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import {
 	addFavorites,
@@ -33,10 +32,14 @@ class MovieItem extends Component {
     });
   };
   render() {
-    const { movie } = this.props;
-    const { Title, Year, Poster, review } = movie;
-    const movieIsNotFavorite = this.findInFavorites(movie) === -1;
-    const btnText = movieIsNotFavorite ? "Fav" : "Unfav";
+		const { movie } = this.props;
+		const { Title, Year, Poster, review } = movie;
+		const movieIsNotFavorite = this.findInFavorites(movie) === -1;
+    const isLoggedIn = this.props.user.isLoggedIn;
+		const btnText = movieIsNotFavorite ? "Fav" : "Unfav";
+    const showBtn = isLoggedIn ? <button onClick={this.addToFavorites} className="btn btn-favorites">
+			{btnText}
+		</button> : null ;
     const showReview =
       !movieIsNotFavorite && !review ? (
         <Review getMovie={movie} />
@@ -52,9 +55,7 @@ class MovieItem extends Component {
         <button className="btn btn-return" onClick={this.goBack}>
           Back
         </button>
-        <button onClick={this.addToFavorites} className="btn btn-favorites">
-          {btnText}
-        </button>
+        {showBtn}
         {showReview}
       </div>
     );
@@ -62,11 +63,10 @@ class MovieItem extends Component {
 }
 const mapStateToProps = state => ({
   movie: state.movies.movie,
-  favorites: state.movies.favorites
+  favorites: state.movies.favorites,
+  user: state.user
 });
-export default withRouter(
-  connect(
+export default connect(
     mapStateToProps,
     { addFavorites, removeFavorites, addReview }
   )(MovieItem)
-);

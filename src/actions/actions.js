@@ -5,6 +5,7 @@ import {
   GET_MOVIE,
   FETCH_MOVIES
 } from "./types";
+
 export const fetchMovies = movie => dispatch => {
   fetch(`https://www.omdbapi.com/?apikey=e99e23f5&s=${movie}`)
     .then(res => res.json())
