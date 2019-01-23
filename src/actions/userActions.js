@@ -1,5 +1,11 @@
-import { USER_LOGIN, USER_ERROR, USER_IS_LOGGED_IN, USER_LOGOUT } from "./types";
+import {
+  USER_LOGIN,
+  USER_ERROR,
+  USER_IS_LOGGED_IN,
+  USER_LOGOUT
+} from "./types";
 import base from "../firebase/firebase";
+import history from "../history";
 
 export const userRegister = user => dispatch => {
   base
@@ -9,6 +15,9 @@ export const userRegister = user => dispatch => {
       res.user.updateProfile({
         displayName: user.login
       });
+    })
+    .then(() => {
+      history.push("/login");
     })
     .catch(error => {
       const warning = { message: error.message, isWarning: true };
@@ -28,13 +37,13 @@ export const userRegister = user => dispatch => {
     });
 };
 
-export const userLogout = () => dispatch =>{
-	base
-		.auth()
+export const userLogout = () => dispatch => {
+  base
+    .auth()
     .signOut()
-		.then(() => {
-			dispatch({ type: USER_LOGOUT, payload: false });
-		})
+    .then(() => {
+      dispatch({ type: USER_LOGOUT, payload: false });
+    });
 };
 
 export const userLogin = user => dispatch => {
@@ -52,6 +61,9 @@ export const userLogin = user => dispatch => {
         type: USER_IS_LOGGED_IN,
         payload: true
       });
+    })
+    .then(() => {
+      history.push("/");
     })
     .catch(error => {
       const warning = { message: error.message, isWarning: true };

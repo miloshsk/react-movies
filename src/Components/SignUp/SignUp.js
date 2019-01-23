@@ -18,7 +18,6 @@ class SignUp extends Component {
   signup = e => {
     e.preventDefault();
     this.props.userRegister(this.state.user);
-    this.props.history.push(`/login`);
   };
   render() {
     const error = this.props.error.isWarning ? (

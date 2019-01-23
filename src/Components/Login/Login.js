@@ -19,7 +19,6 @@ class Login extends Component {
   login = e => {
     e.preventDefault();
     this.props.userLogin(this.state.user);
-		this.props.history.push(`/`);
   };
   render() {
     const error = this.props.error.isWarning ? (
@@ -54,9 +53,9 @@ class Login extends Component {
   }
 }
 const mapStateToProps = state => {
-	return ({
-		error: state.user.error
-	});
+  return {
+    error: state.user.error
+  };
 };
 export default connect(
   mapStateToProps,
