@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Review from "../Review/Review";
 import "./movie-item.sass";
 import connect from "react-redux/es/connect/connect";
+import history from "../../history";
 import {
 	addFavorites,
   removeFavorites,
@@ -24,7 +25,7 @@ class MovieItem extends Component {
     }
   };
   goBack = () => {
-    this.props.history.push(`/${this.props.match.params.list}`);
+    history.push(`/${this.props.match.params.list}`);
   };
   findInFavorites = movie => {
     return this.props.favorites.findIndex(item => {

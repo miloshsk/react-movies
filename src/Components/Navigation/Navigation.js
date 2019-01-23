@@ -1,60 +1,56 @@
-import React, { Component, Fragment } from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import { userLogout } from "../../actions/userActions";
+import history from "../../history";
+import Burger from "../Burger/Burger";
+import Link from "../Link/Link";
 
 class Navigation extends Component {
+  state = {
+    isMenuShowed: false
+  };
   logOut = () => {
     this.props.userLogout();
-    this.props.history.push(`/`);
+    history.push(`/`);
+  };
+  toggleMobileMenu = info => {
+    this.setState({
+      isMenuShowed: info
+    });
   };
   render() {
-    const userName = this.props.user.user;
-    const isUserLoggedIn = this.props.user.isLoggedIn;
+    const { user } = this.props;
+    const userName = user.user;
+    const isUserLoggedIn = user.isLoggedIn;
     const showProfile = isUserLoggedIn ? (
       <button className="btn" onClick={this.logOut}>
         Log out
       </button>
     ) : (
-      <li>
-        <NavLink exact activeClassName="btn-active" className="btn" to="/login">
-          Login
-        </NavLink>
-      </li>
+      <Link path={"/login"} name={"Login"} />
     );
-    const showFavButtoon = isUserLoggedIn ? (
-      <li>
-        <NavLink activeClassName="btn-active" className="btn" to="/favorites">
-          Favorites
-        </NavLink>
-      </li>
+    const showFavButton = isUserLoggedIn ? (
+      <Link path={"/favorites"} name={"Favorites"} />
     ) : null;
     const showUser = isUserLoggedIn ? (
       <span className="user-field">Welcome {userName}</span>
     ) : null;
     return (
-      <Fragment>
-        <ul className="menu">
-          <li>
-            <NavLink exact activeClassName="btn-active" className="btn" to="/">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="btn-active" className="btn" to="/movies">
-              Movies
-            </NavLink>
-          </li>
-          {showFavButtoon}
-          <li>
-            <NavLink activeClassName="btn-active" className="btn" to="/sign-up">
-              Sign up
-            </NavLink>
-          </li>
+      <nav className="page-nav">
+        <ul className={`menu ${this.state.isMenuShowed ? "menu-show" : null}`}>
+          <Link path={"/"} name={"Home"} />
+          <Link path={"/movies"} name={"Movies"} />
+          {showFavButton}
+          <Link path={"/sign-up"} name={"Sign up"} />
           {showProfile}
         </ul>
         {showUser}
-      </Fragment>
+        <Burger
+          toggleMobileMenu={this.toggleMobileMenu}
+          isMenuShowed={this.state.isMenuShowed}
+        />
+      </nav>
     );
   }
 }

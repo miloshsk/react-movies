@@ -1,0 +1,39 @@
+.btn-burger
+  position: fixed
+  top: 15px
+  left: 20px
+  width: 30px
+  height: 20px
+  background-color: inherit
+  border: none
+  padding: 0
+  cursor: pointer
+  display: none
+  .btn-burger__line
+    position: absolute
+    width: 100%
+    height: 3px
+    background-color: #fff
+    right: 0
+    left: 0
+    transition: 0.3s ease
+  .btn-burger__line-top
+    top: 0
+  .btn-burger__line-mid
+    top: 10px
+  .btn-burger__line-bottom
+    top: 20px
+.btn-burger-opened
+  .btn-burger__line-top
+    top: 10px
+    transform: rotate(45deg)
+  .btn-burger__line-mid
+    top: 10px
+    opacity: 0
+  .btn-burger__line-bottom
+    top: 10px
+    transform: rotate(-45deg)
+
+@media only screen and (max-width: 640px)
+  .btn-burger
+    display: block

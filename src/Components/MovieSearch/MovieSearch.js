@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./movie-search.sass";
 import { connect } from "react-redux";
 import { fetchMovies } from "../../actions/actions";
-
+import history from "../../history";
 class MoviesSearch extends Component {
   state = {
     searchingMovie: ""
@@ -18,7 +18,7 @@ class MoviesSearch extends Component {
     this.setState({
       searchingMovie: ""
     });
-    this.props.history.push("/movies");
+    history.push("/movies");
   };
   render() {
     return (
