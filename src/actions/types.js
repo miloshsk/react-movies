@@ -7,3 +7,4 @@ export const USER_LOGIN = "USER_LOGIN";
 export const USER_ERROR = "USER_ERROR";
 export const USER_IS_LOGGED_IN = "USER_IS_LOGGED_IN";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const MENU_TOGGLE = "MENU_TOGGLE";
