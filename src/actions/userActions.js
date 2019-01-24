@@ -5,38 +5,21 @@ import {
   USER_LOGOUT
 } from "./types";
 import base from "../firebase/firebase";
-import history from "../history";
 
-export const userRegister = user => dispatch => {
-  base
-    .auth()
-    .createUserWithEmailAndPassword(user.email, user.password)
-    .then(res => {
-      res.user.updateProfile({
-        displayName: user.login
-      });
-    })
-    .then(() => {
-      history.push("/login");
-    })
-    .catch(error => {
-      const warning = { message: error.message, isWarning: true };
-      dispatch({
-        type: USER_ERROR,
-        payload: warning
-      });
-    })
-    .then(() => {
-      const warning = { message: "", isWarning: false };
-      setTimeout(() => {
-        dispatch({
-          type: USER_ERROR,
-          payload: warning
-        });
-      }, 2000);
+export const userError = error => dispatch => {
+  const warning = { message: error.message, isWarning: true };
+  dispatch({
+    type: USER_ERROR,
+    payload: warning
+  });
+  setTimeout(() => {
+    const warn = { message: "", isWarning: false };
+    dispatch({
+      type: USER_ERROR,
+      payload: warn
     });
+  }, 2000);
 };
-
 export const userLogout = () => dispatch => {
   base
     .auth()
@@ -45,40 +28,15 @@ export const userLogout = () => dispatch => {
       dispatch({ type: USER_LOGOUT, payload: false });
     });
 };
-
+export const userIsLogin = () => dispatch => {
+  dispatch({
+    type: USER_IS_LOGGED_IN,
+    payload: true
+  });
+};
 export const userLogin = user => dispatch => {
-  base
-    .auth()
-    .signInWithEmailAndPassword(user.email, user.password)
-    .then(res => {
-      dispatch({
-        type: USER_LOGIN,
-        payload: res.user.displayName
-      });
-    })
-    .then(() => {
-      dispatch({
-        type: USER_IS_LOGGED_IN,
-        payload: true
-      });
-    })
-    .then(() => {
-      history.push("/");
-    })
-    .catch(error => {
-      const warning = { message: error.message, isWarning: true };
-      dispatch({
-        type: USER_ERROR,
-        payload: warning
-      });
-    })
-    .then(() => {
-      const warning = { message: "", isWarning: false };
-      setTimeout(() => {
-        dispatch({
-          type: USER_ERROR,
-          payload: warning
-        });
-      }, 2000);
-    });
+  dispatch({
+    type: USER_LOGIN,
+    payload: user
+  });
 };

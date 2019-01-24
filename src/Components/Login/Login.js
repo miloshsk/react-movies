@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./login.sass";
 import connect from "react-redux/es/connect/connect";
-import { userLogin } from "../../actions/userActions";
+import { userLogin, userIsLogin, userError } from "../../actions/userActions";
+import base from "../../firebase/firebase";
+import history from "../../history";
 
 class Login extends Component {
   state = {
@@ -18,7 +20,24 @@ class Login extends Component {
 
   login = e => {
     e.preventDefault();
-    this.props.userLogin(this.state.user);
+    base
+      .auth()
+      .signInWithEmailAndPassword(
+        this.state.user.email,
+        this.state.user.password
+      )
+      .then(res => {
+        this.props.userLogin(res.user.displayName);
+      })
+      .then(() => {
+        this.props.userIsLogin();
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch(error => {
+        this.props.userError(error);
+      });
   };
   render() {
     const error = this.props.error.isWarning ? (
@@ -59,5 +78,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { userLogin }
+  { userLogin, userIsLogin, userError }
 )(Login);

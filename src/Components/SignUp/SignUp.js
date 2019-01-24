@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
-import { userRegister } from "../../actions/userActions";
+import { userError } from "../../actions/userActions";
+import base from "../../firebase/firebase";
+import history from "../../history";
 
 class SignUp extends Component {
   state = {
@@ -17,7 +19,27 @@ class SignUp extends Component {
   };
   signup = e => {
     e.preventDefault();
-    this.props.userRegister(this.state.user);
+    if (!this.state.user.login) {
+      this.props.userError({ message: "User name is empty!" });
+    } else {
+      base
+        .auth()
+        .createUserWithEmailAndPassword(
+          this.state.user.email,
+          this.state.user.password
+        )
+        .then(res => {
+          res.user.updateProfile({
+            displayName: this.state.user.login
+          });
+        })
+        .then(() => {
+          history.push("/login");
+        })
+        .catch(error => {
+          this.props.userError(error);
+        });
+    }
   };
   render() {
     const error = this.props.error.isWarning ? (
@@ -65,5 +87,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { userRegister }
+  { userError }
 )(SignUp);
