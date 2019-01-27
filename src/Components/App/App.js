@@ -11,6 +11,7 @@ import SignUp from "../SignUp/SignUp";
 
 import "normalize.css";
 import "./app.sass";
+import "./buttons.sass";
 
 import { Provider } from "react-redux";
 import store from "../../store";

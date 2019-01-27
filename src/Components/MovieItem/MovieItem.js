@@ -1,28 +1,23 @@
 import React, { Component } from "react";
-import Review from "../Review/Review";
+import ReviewForm from "../ReviewForm/ReviewForm";
+import ReviewText from "../ReviewText/ReviewText";
 import "./movie-item.sass";
 import connect from "react-redux/es/connect/connect";
 import history from "../../history";
 import {
-	addFavorites,
+  addFavorites,
   removeFavorites,
   addReview
 } from "../../actions/actions";
 
 class MovieItem extends Component {
   addToFavorites = e => {
-    switch (e.target.textContent) {
-      case "Fav":
-        e.target.innerText = "Unfav";
-        this.props.addFavorites(this.props.movie);
-        break;
-      case "Unfav":
-        e.target.innerText = "Fav";
-        this.props.removeFavorites(this.props.movie);
-        break;
-      default:
-        return;
+    if (e.currentTarget.classList.contains("fav")) {
+      this.props.removeFavorites(this.props.movie);
+    } else {
+      this.props.addFavorites(this.props.movie);
     }
+    e.currentTarget.classList.toggle("fav");
   };
   goBack = () => {
     history.push(`/${this.props.match.params.list}`);
@@ -33,31 +28,39 @@ class MovieItem extends Component {
     });
   };
   render() {
-		const { movie } = this.props;
-		const { Title, Year, Poster, review } = movie;
-		const movieIsNotFavorite = this.findInFavorites(movie) === -1;
-    const isLoggedIn = this.props.user.isLoggedIn;
-		const btnText = movieIsNotFavorite ? "Fav" : "Unfav";
-    const showBtn = isLoggedIn ? <button onClick={this.addToFavorites} className="btn btn-favorites">
-			{btnText}
-		</button> : null ;
-    const showReview =
-      !movieIsNotFavorite && !review ? (
-        <Review getMovie={movie} />
-      ) : (
-        null || <p>{review}</p>
-      );
-
+    const { movie } = this.props;
+    const { Title, Year, Poster, review } = movie;
+    const movieIsNotFavorite = this.findInFavorites(movie) === -1;
+    const showBtn = this.props.user.isLoggedIn ? (
+      <button
+        onClick={this.addToFavorites}
+        className={`btn btn-favorites ${movieIsNotFavorite ? "" : " fav"}`}
+      >
+        <i className="fas fa-star" />
+      </button>
+    ) : null;
+    let showReview;
+    if (
+      !movieIsNotFavorite &&
+      !review &&
+      this.props.match.params.list === "favorites"
+    ) {
+      showReview = <ReviewForm getMovie={movie} />;
+    } else if (!movieIsNotFavorite && review) {
+      showReview = <ReviewText review={review} />;
+    } else {
+      showReview = null;
+    }
     return (
       <div className="movie">
         <h2 className="movie__title">{Title}</h2>
         <p className="movie__year">{Year}</p>
         <img className="movie__poster" src={Poster} alt="" />
         <button className="btn btn-return" onClick={this.goBack}>
-          Back
+          Return
         </button>
-        {showBtn}
         {showReview}
+				{showBtn}
       </div>
     );
   }
@@ -68,6 +71,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 export default connect(
-    mapStateToProps,
-    { addFavorites, removeFavorites, addReview }
-  )(MovieItem)
+  mapStateToProps,
+  { addFavorites, removeFavorites, addReview }
+)(MovieItem);

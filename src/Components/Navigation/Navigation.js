@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import { userLogout } from "../../actions/userActions";
 import { menuToggle } from "../../actions/menuActions";
 import history from "../../history";
 import Burger from "../Burger/Burger";
-import Link from "../Link/Link";
 
 class Navigation extends Component {
   logOut = () => {
     this.props.userLogout();
     history.push(`/`);
+  };
+  menuToggle = () => {
+    if (window.innerWidth < 640) {
+      const isMenuShowed = !this.props.isMenuOpen;
+      this.props.menuToggle(isMenuShowed);
+    }
   };
   render() {
     const { user } = this.props;
@@ -21,10 +26,30 @@ class Navigation extends Component {
         Log out
       </button>
     ) : (
-      <Link path={"/login"} name={"Login"} />
+      <li>
+        <NavLink
+          exact
+          activeClassName="btn-active"
+          className="btn btn-link"
+          to="/login"
+          onClick={this.menuToggle}
+        >
+          Login
+        </NavLink>
+      </li>
     );
     const showFavButton = isUserLoggedIn ? (
-      <Link path={"/favorites"} name={"Favorites"} />
+      <li>
+        <NavLink
+          exact
+          activeClassName="btn-active"
+          className="btn btn-link"
+          to="/favorites"
+          onClick={this.menuToggle}
+        >
+          Favorites
+        </NavLink>
+      </li>
     ) : null;
     const showUser = isUserLoggedIn ? (
       <span className="user-field">Welcome {userName}</span>
@@ -32,10 +57,40 @@ class Navigation extends Component {
     return (
       <nav className="page-nav">
         <ul className={`menu ${this.props.isMenuOpen ? "menu-show" : ""}`}>
-          <Link path={"/"} name={"Home"} />
-          <Link path={"/movies"} name={"Movies"} />
+          <li>
+            <NavLink
+              exact
+              activeClassName="btn-active"
+              className="btn btn-link"
+              to="/"
+              onClick={this.menuToggle}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              exact
+              activeClassName="btn-active"
+              className="btn btn-link"
+              to="/movies"
+              onClick={this.menuToggle}
+            >
+              Movies
+            </NavLink>
+          </li>
           {showFavButton}
-          <Link path={"/sign-up"} name={"Sign up"} />
+          <li>
+            <NavLink
+              exact
+              activeClassName="btn-active"
+              className="btn btn-link"
+              to="/sign-up"
+              onClick={this.menuToggle}
+            >
+              Sign up
+            </NavLink>
+          </li>
           {showProfile}
         </ul>
         {showUser}

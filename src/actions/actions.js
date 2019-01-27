@@ -3,7 +3,8 @@ import {
   REMOVE_FAVORITES,
   ADD_FAVORITES,
   GET_MOVIE,
-  FETCH_MOVIES
+  FETCH_MOVIES,
+	REMOVE_REVIEW
 } from "./types";
 
 export const fetchMovies = movie => dispatch => {
@@ -41,4 +42,10 @@ export const addReview = (review, movie) => dispatch => {
     payload: review,
     movie
   });
+};
+export const removeReview = (review) => dispatch => {
+	dispatch({
+		type: REMOVE_REVIEW,
+		payload: review
+	});
 };

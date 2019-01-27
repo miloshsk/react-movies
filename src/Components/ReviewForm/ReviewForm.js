@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./review.sass";
+import "./reviewForm.sass";
 import connect from "react-redux/es/connect/connect";
 import { addReview } from "../../actions/actions";
 
-class Review extends Component {
+class ReviewForm extends Component {
   state = {
     reviewText: ""
   };
@@ -30,8 +30,8 @@ class Review extends Component {
           rows="1"
           placeholder="Type your review here"
         />
-        <button className="btn review__btn" type="submit">
-          Add review
+        <button className="btn btn-review-add" type="submit">
+					Add review
         </button>
       </form>
     );
@@ -41,4 +41,4 @@ class Review extends Component {
 export default connect(
   null,
   { addReview }
-)(Review);
+)(ReviewForm);

@@ -3,7 +3,8 @@ import {
   GET_MOVIE,
   REMOVE_FAVORITES,
   ADD_FAVORITES,
-  ADD_REVIEW
+  ADD_REVIEW,
+  REMOVE_REVIEW
 } from "../actions/types";
 
 const initialState = {
@@ -45,6 +46,14 @@ export default function(state = initialState, action) {
             : movie
         ),
         movie: { ...state.movie, review: action.payload }
+      };
+    case REMOVE_REVIEW:
+      return {
+        ...state,
+        favorites: state.favorites.map(movie =>
+          movie.review === action.payload ? { ...movie, review: "" } : movie
+        ),
+				movie: { ...state.movie, review: "" }
       };
     default:
       return state;
