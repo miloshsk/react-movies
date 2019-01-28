@@ -46,6 +46,6 @@ export const addReview = (review, movie) => dispatch => {
 export const removeReview = (review) => dispatch => {
 	dispatch({
 		type: REMOVE_REVIEW,
-		payload: review
+    payload: review
 	});
 };

@@ -4,7 +4,7 @@ import connect from "react-redux/es/connect/connect";
 import { menuToggle } from "../../actions/menuActions";
 
 class Link extends Component {
-  menuToggle = () => {
+  burgerToggle = () => {
     if (window.innerWidth < 640) {
       const isMenuShowed = !this.props.isMenuOpen;
       this.props.menuToggle(isMenuShowed);
@@ -18,7 +18,7 @@ class Link extends Component {
           className="btn btn-link"
           activeClassName="btn-active"
           exact
-          onClick={this.menuToggle}
+          onClick={this.burgerToggle}
         >
           {this.props.label}
         </NavLink>

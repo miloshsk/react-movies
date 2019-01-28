@@ -15,9 +15,6 @@ class ReviewForm extends Component {
   sendReview = e => {
     e.preventDefault();
     this.props.addReview(this.state.reviewText, this.props.getMovie);
-    this.setState({
-      reviewText: ""
-    });
   };
   render() {
     return (
@@ -31,7 +28,7 @@ class ReviewForm extends Component {
           placeholder="Type your review here"
         />
         <button className="btn btn-review-add" type="submit">
-					Add review
+          Add review
         </button>
       </form>
     );

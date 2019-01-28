@@ -10,19 +10,18 @@ import Link from "../Link/Link";
 class Navigation extends Component {
   logOut = () => {
     this.props.userLogout();
-    this.menuToggle();
+    this.burgerToggle();
     history.push(`/`);
   };
-  menuToggle = () => {
+  burgerToggle = () => {
     if (window.innerWidth < 640) {
       const isMenuShowed = !this.props.isMenuOpen;
       this.props.menuToggle(isMenuShowed);
     }
   };
   render() {
-    const { user } = this.props;
-    const userName = user.user;
-    const isUserLoggedIn = user.isLoggedIn;
+    const userName = this.props.userState.user;
+    const isUserLoggedIn = this.props.userState.isLoggedIn;
     const showProfile = isUserLoggedIn ? (
       <button className="btn btn-link" onClick={this.logOut}>
         Log out
@@ -46,13 +45,16 @@ class Navigation extends Component {
           {showProfile}
         </ul>
         {showUser}
-        <Burger />
+        <Burger
+          burgerToggle={this.burgerToggle}
+          isMenuOpen={this.props.isMenuOpen}
+        />
       </nav>
     );
   }
 }
 const mapStateToProps = state => ({
-  user: state.user,
+  userState: state.user,
   isMenuOpen: state.menu.isMenuOpen
 });
 export default withRouter(

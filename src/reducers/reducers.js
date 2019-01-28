@@ -10,7 +10,8 @@ import {
 const initialState = {
   movies: [],
   favorites: [],
-  movie: null
+  movie: null,
+  review: ""
 };
 
 export default function(state = initialState, action) {
@@ -53,7 +54,7 @@ export default function(state = initialState, action) {
         favorites: state.favorites.map(movie =>
           movie.review === action.payload ? { ...movie, review: "" } : movie
         ),
-				movie: { ...state.movie, review: "" }
+        movie: { ...state.movie, review: "" }
       };
     default:
       return state;

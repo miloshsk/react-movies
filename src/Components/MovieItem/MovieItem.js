@@ -7,7 +7,8 @@ import history from "../../history";
 import {
   addFavorites,
   removeFavorites,
-  addReview
+  addReview,
+  removeReview
 } from "../../actions/actions";
 
 class MovieItem extends Component {
@@ -30,24 +31,26 @@ class MovieItem extends Component {
   render() {
     const { movie } = this.props;
     const { Title, Year, Poster, review } = movie;
-    const movieIsNotFavorite = this.findInFavorites(movie) === -1;
-    const showBtn = this.props.user.isLoggedIn ? (
+    const movieInFavoritesList = this.findInFavorites(movie) !== -1;
+    const showFavoriteBtn = this.props.user.isLoggedIn ? (
       <button
         onClick={this.addToFavorites}
-        className={`btn btn-favorites ${movieIsNotFavorite ? "" : " fav"}`}
+        className={`btn btn-favorites ${movieInFavoritesList ? "fav" : " "}`}
       >
         <i className="fas fa-star" />
       </button>
     ) : null;
     let showReview;
     if (
-      !movieIsNotFavorite &&
+      movieInFavoritesList &&
       !review &&
       this.props.match.params.list === "favorites"
     ) {
       showReview = <ReviewForm getMovie={movie} />;
-    } else if (!movieIsNotFavorite && review) {
-      showReview = <ReviewText review={review} />;
+    } else if (movieInFavoritesList && review) {
+      showReview = (
+        <ReviewText review={review} removeReview={this.props.removeReview} />
+      );
     } else {
       showReview = null;
     }
@@ -60,7 +63,7 @@ class MovieItem extends Component {
           Return
         </button>
         {showReview}
-				{showBtn}
+        {showFavoriteBtn}
       </div>
     );
   }
@@ -72,5 +75,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { addFavorites, removeFavorites, addReview }
+  { addFavorites, removeFavorites, addReview, removeReview }
 )(MovieItem);
