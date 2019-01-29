@@ -4,7 +4,8 @@ import {
   ADD_FAVORITES,
   GET_MOVIE,
   FETCH_MOVIES,
-	REMOVE_REVIEW
+  REMOVE_REVIEW,
+  SET_SEARCHING_MOVIE
 } from "./types";
 
 export const fetchMovies = movie => dispatch => {
@@ -17,6 +18,12 @@ export const fetchMovies = movie => dispatch => {
         payload: movies ? movies : []
       })
     );
+};
+export const setSearchingResult = movie => dispatch => {
+  dispatch({
+    type: SET_SEARCHING_MOVIE,
+    payload: movie
+  });
 };
 export const getMovie = movie => dispatch => {
   dispatch({
@@ -43,9 +50,9 @@ export const addReview = (review, movie) => dispatch => {
     movie
   });
 };
-export const removeReview = (review) => dispatch => {
-	dispatch({
-		type: REMOVE_REVIEW,
+export const removeReview = review => dispatch => {
+  dispatch({
+    type: REMOVE_REVIEW,
     payload: review
-	});
+  });
 };

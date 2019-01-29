@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./movie-search.sass";
 import { connect } from "react-redux";
-import { fetchMovies } from "../../actions/actions";
+import { setSearchingResult } from "../../actions/actions";
 import history from "../../history";
 class MoviesSearch extends Component {
   state = {
@@ -14,7 +14,7 @@ class MoviesSearch extends Component {
   };
   searchMovie = e => {
     e.preventDefault();
-    this.props.fetchMovies(this.state.searchingMovie);
+    this.props.setSearchingResult(this.state.searchingMovie);
     this.setState({
       searchingMovie: ""
     });
@@ -37,5 +37,5 @@ class MoviesSearch extends Component {
 }
 export default connect(
   null,
-  { fetchMovies }
+  { setSearchingResult }
 )(MoviesSearch);

@@ -3,9 +3,12 @@ import { Link, withRouter } from "react-router-dom";
 import Error from "../Error/Error";
 import "./movie-list.sass";
 import connect from "react-redux/es/connect/connect";
-import { getMovie } from "../../actions/actions";
+import { getMovie, fetchMovies } from "../../actions/actions";
 
 class MoviesList extends Component {
+  componentDidMount() {
+    this.props.fetchMovies(this.props.state.searchingMovie);
+  }
   createList = (moviesList, getMovieById, list) => {
     return moviesList[list].map(movie => {
       const { imdbID, Title } = movie;
@@ -48,6 +51,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { getMovie }
+    { getMovie, fetchMovies }
   )(MoviesList)
 );

@@ -4,14 +4,16 @@ import {
   REMOVE_FAVORITES,
   ADD_FAVORITES,
   ADD_REVIEW,
-  REMOVE_REVIEW
+  REMOVE_REVIEW,
+  SET_SEARCHING_MOVIE
 } from "../actions/types";
 
 const initialState = {
   movies: [],
   favorites: [],
   movie: null,
-  review: ""
+  review: "",
+  searchingMovie: ""
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +22,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         movies: action.payload
+      };
+    case SET_SEARCHING_MOVIE:
+      return {
+        ...state,
+        searchingMovie: action.payload
       };
     case GET_MOVIE:
       return {

@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import "./reviewText.sass";
-import connect from "react-redux/es/connect/connect";
-import { removeReview } from "../../actions/actions";
 
 const ReviewText = ({ review, removeReview }) => {
   return (
