@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Error from "../Error/Error";
 import "./movie-list.sass";
 import connect from "react-redux/es/connect/connect";
 import { getMovie, fetchMovies } from "../../actions/actions";
@@ -27,20 +26,14 @@ class MoviesList extends Component {
     });
   };
   render() {
-    const { state, error, getMovieById, list } = this.props;
+    const { state, getMovieById, list } = this.props;
     const movies = this.createList(state, getMovieById, list);
     return (
       <Fragment>
-        {error ? (
-          <Error />
-        ) : (
-          <div>
-            <h2 style={{ textAlign: "center" }}>
-              {state[list].length} movies in {list}
-            </h2>
-            <ul className="movie-list">{movies}</ul>
-          </div>
-        )}
+        <h2 style={{ textAlign: "center" }}>
+          {state[list].length} movies in {list}
+        </h2>
+        <ul className="movie-list">{movies}</ul>
       </Fragment>
     );
   }

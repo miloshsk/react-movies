@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import history from "../../history";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import MovieSearch from "../MovieSearch/MovieSearch";
 import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
@@ -12,56 +11,50 @@ import SignUp from "../SignUp/SignUp";
 import "normalize.css";
 import "./app.sass";
 import "./buttons.sass";
+import connect from "react-redux/es/connect/connect";
 
-import { Provider } from "react-redux";
-import store from "../../store";
-
-export default class App extends Component {
-  state = {
-    isError: false
-  };
+class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router history={history}>
-          <Fragment>
-            <Navigation />
-            <Switch>
-              <Route path="/" exact component={MovieSearch} />
-              <Route
-                path="/movies"
-                exact
-                render={props => (
-                  <MoviesList
-                    {...props}
-                    list={"movies"}
-                    error={this.state.isError}
-                  />
-                )}
-              />
-              <Route
-                path="/favorites"
-                exact
-                render={props => (
-                  <MoviesList
-                    {...props}
-                    list={"favorites"}
-                    error={this.state.isError}
-                  />
-                )}
-              />
-              <Route
-                path="/:list/:id"
-                exact
-                render={props => <MovieItem {...props} />}
-              />
-              <Route path="/login" exact component={Login} />
-              <Route path="/sign-up" exact component={SignUp} />
-              <Route component={Error} />
-            </Switch>
-          </Fragment>
-        </Router>
-      </Provider>
+      <Fragment>
+        <Navigation />
+        <Switch>
+          <Route path="/" exact component={MovieSearch} />
+          <Route
+            path="/movies"
+            exact
+            render={props => <MoviesList {...props} list={"movies"} />}
+          />
+          <Route
+            path="/favorites"
+            exact
+            render={props =>
+              this.props.isLoggedIn ? (
+                <MoviesList {...props} list={"favorites"} />
+              ) : (
+                <Redirect to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/:list/:id"
+            exact
+            render={props => <MovieItem {...props} />}
+          />
+          <Route path="/login" exact component={Login} />
+          <Route path="/sign-up" exact component={SignUp} />
+          <Route component={Error} />
+        </Switch>
+      </Fragment>
     );
   }
 }
+const mapStateToProps = state => ({
+  isLoggedIn: state.user.isLoggedIn
+});
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(App)
+);
