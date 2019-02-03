@@ -2,11 +2,15 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./movie-list.sass";
 import connect from "react-redux/es/connect/connect";
-import { getMovie, fetchMovies } from "../../actions/actions";
+import { getMovie, fetchMovies, fetchFavorites } from "../../actions/actions";
 
 class MoviesList extends Component {
   componentDidMount() {
-    this.props.fetchMovies(this.props.state.searchingMovie);
+    const {fetchFavorites, user, fetchMovies, state} = this.props;
+		fetchMovies(state.searchingMovie);
+		if(user.isLoggedIn) {
+			fetchFavorites(user.user);
+    }
   }
   createList = (moviesList, getMovieById, list) => {
     return moviesList[list].map(movie => {
@@ -39,11 +43,12 @@ class MoviesList extends Component {
   }
 }
 const mapStateToProps = state => ({
-  state: state.movies
+  state: state.movies,
+  user: state.user
 });
 export default withRouter(
   connect(
     mapStateToProps,
-    { getMovie, fetchMovies }
+    { getMovie, fetchMovies, fetchFavorites }
   )(MoviesList)
 );

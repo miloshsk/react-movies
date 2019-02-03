@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./login.sass";
 import connect from "react-redux/es/connect/connect";
 import { userLogin, userIsLogin, userError } from "../../actions/userActions";
-import base from "../../firebase/firebase";
+import {base} from "../../firebase/firebase";
 import history from "../../history";
 
 class Login extends Component {

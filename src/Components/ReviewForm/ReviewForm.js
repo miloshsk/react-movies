@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./reviewForm.sass";
 import connect from "react-redux/es/connect/connect";
-import { addReview } from "../../actions/actions";
+import { setReview } from "../../actions/actions";
 
 class ReviewForm extends Component {
   state = {
@@ -14,7 +14,11 @@ class ReviewForm extends Component {
   };
   sendReview = e => {
     e.preventDefault();
-    this.props.addReview(this.state.reviewText, this.props.getMovie);
+    this.props.setReview(
+      this.state.reviewText,
+      this.props.getMovie,
+      this.props.user
+    );
   };
   render() {
     return (
@@ -34,8 +38,10 @@ class ReviewForm extends Component {
     );
   }
 }
-
+const mapStateToProps = state => ({
+  user: state.user.user
+});
 export default connect(
-  null,
-  { addReview }
+  mapStateToProps,
+  { setReview }
 )(ReviewForm);

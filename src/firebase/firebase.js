@@ -7,5 +7,5 @@ const config = {
 	storageBucket: "reactmovies-6dd7d.appspot.com",
 	messagingSenderId: "817662408691"
 };
-const base = firebase.initializeApp(config);
-export default base;
+export const base = firebase.initializeApp(config);
+export const database = firebase.database();

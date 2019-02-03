@@ -1,12 +1,10 @@
 export const FETCH_MOVIES = "FETCH_MOVIES";
 export const GET_MOVIE = "GET_MOVIE";
 export const SET_SEARCHING_MOVIE = "SET_SEARCHING_MOVIE";
-export const ADD_FAVORITES = "ADD_FAVORITES";
-export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
-export const ADD_REVIEW = "ADD_REVIEW";
-export const REMOVE_REVIEW = "REMOVE_REVIEW";
+export const SET_REVIEW = "SET_REVIEW";
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_ERROR = "USER_ERROR";
 export const USER_IS_LOGGED_IN = "USER_IS_LOGGED_IN";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const MENU_TOGGLE = "MENU_TOGGLE";
+export const FETCH_FAVORITES = "FETCH_FAVORITES";

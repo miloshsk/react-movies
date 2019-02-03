@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
 import { userError } from "../../actions/userActions";
-import base from "../../firebase/firebase";
+import {base} from "../../firebase/firebase";
 import history from "../../history";
 
 class SignUp extends Component {

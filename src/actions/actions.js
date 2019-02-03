@@ -1,12 +1,11 @@
 import {
-  ADD_REVIEW,
-  REMOVE_FAVORITES,
-  ADD_FAVORITES,
+  SET_REVIEW,
   GET_MOVIE,
   FETCH_MOVIES,
-  REMOVE_REVIEW,
-  SET_SEARCHING_MOVIE
+  SET_SEARCHING_MOVIE,
+  FETCH_FAVORITES
 } from "./types";
+import { database } from "../firebase/firebase";
 
 export const fetchMovies = movie => dispatch => {
   fetch(`https://www.omdbapi.com/?apikey=e99e23f5&s=${movie}`)
@@ -18,6 +17,23 @@ export const fetchMovies = movie => dispatch => {
         payload: movies ? movies : []
       })
     );
+};
+export const fetchFavorites = user => dispatch => {
+  database
+    .ref(`favorites/${user}`)
+    .once("value")
+    .then(s => {
+      return s.val() || {};
+    })
+    .then(x => {
+      return Object.values(x);
+    })
+    .then(res => {
+      dispatch({
+        type: FETCH_FAVORITES,
+        payload: res
+      });
+    });
 };
 export const setSearchingResult = movie => dispatch => {
   dispatch({
@@ -31,28 +47,11 @@ export const getMovie = movie => dispatch => {
     payload: movie
   });
 };
-export const addFavorites = movie => dispatch => {
+export const setReview = (review, movie, user) => dispatch => {
+  database.ref(`favorites/${user}/${movie.Title}`).update({ review });
   dispatch({
-    type: ADD_FAVORITES,
-    payload: movie
-  });
-};
-export const removeFavorites = movie => dispatch => {
-  dispatch({
-    type: REMOVE_FAVORITES,
-    payload: movie
-  });
-};
-export const addReview = (review, movie) => dispatch => {
-  dispatch({
-    type: ADD_REVIEW,
+    type: SET_REVIEW,
     payload: review,
     movie
-  });
-};
-export const removeReview = review => dispatch => {
-  dispatch({
-    type: REMOVE_REVIEW,
-    payload: review
   });
 };

@@ -4,7 +4,7 @@ import {
   USER_IS_LOGGED_IN,
   USER_LOGOUT
 } from "./types";
-import base from "../firebase/firebase";
+import {base} from "../firebase/firebase";
 
 export const userError = error => dispatch => {
   const warning = { message: error.message, isWarning: true };

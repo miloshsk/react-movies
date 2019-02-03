@@ -1,11 +1,9 @@
 import {
   FETCH_MOVIES,
   GET_MOVIE,
-  REMOVE_FAVORITES,
-  ADD_FAVORITES,
-  ADD_REVIEW,
-  REMOVE_REVIEW,
-  SET_SEARCHING_MOVIE
+  SET_REVIEW,
+  SET_SEARCHING_MOVIE,
+  FETCH_FAVORITES
 } from "../actions/types";
 
 const initialState = {
@@ -33,19 +31,12 @@ export default function(state = initialState, action) {
         ...state,
         movie: action.payload
       };
-    case ADD_FAVORITES:
+    case FETCH_FAVORITES:
       return {
         ...state,
-        favorites: [...state.favorites, action.payload]
+        favorites: action.payload
       };
-    case REMOVE_FAVORITES:
-      return {
-        ...state,
-        favorites: state.favorites.filter(
-          item => item.imdbID !== action.payload.imdbID
-        )
-      };
-    case ADD_REVIEW:
+    case SET_REVIEW:
       return {
         ...state,
         favorites: state.favorites.map(movie =>
@@ -54,14 +45,6 @@ export default function(state = initialState, action) {
             : movie
         ),
         movie: { ...state.movie, review: action.payload }
-      };
-    case REMOVE_REVIEW:
-      return {
-        ...state,
-        favorites: state.favorites.map(movie =>
-          movie.review === action.payload ? { ...movie, review: "" } : movie
-        ),
-        movie: { ...state.movie, review: "" }
       };
     default:
       return state;

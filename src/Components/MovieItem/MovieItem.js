@@ -4,19 +4,18 @@ import ReviewText from "../ReviewText/ReviewText";
 import "./movie-item.sass";
 import connect from "react-redux/es/connect/connect";
 import history from "../../history";
-import {
-  addFavorites,
-  removeFavorites,
-  addReview,
-  removeReview
-} from "../../actions/actions";
+import { database } from "../../firebase/firebase";
+import { setReview } from "../../actions/actions";
 
 class MovieItem extends Component {
-  addToFavorites = e => {
+  toggleFavorites = e => {
+    const { user, movie } = this.props;
     if (e.currentTarget.classList.contains("fav")) {
-      this.props.removeFavorites(this.props.movie);
+      database.ref(`favorites/${user.user}/${movie.Title}`).remove();
     } else {
-      this.props.addFavorites(this.props.movie);
+      database.ref(`favorites/${user.user}/${movie.Title}`).set({
+        ...movie
+      });
     }
     e.currentTarget.classList.toggle("fav");
   };
@@ -34,7 +33,7 @@ class MovieItem extends Component {
     const movieInFavoritesList = this.findInFavorites(movie) !== -1;
     const showFavoriteBtn = this.props.user.isLoggedIn ? (
       <button
-        onClick={this.addToFavorites}
+        onClick={this.toggleFavorites}
         className={`btn btn-favorites ${movieInFavoritesList ? "fav" : " "}`}
       >
         <i className="fas fa-star" />
@@ -49,7 +48,12 @@ class MovieItem extends Component {
       showReview = <ReviewForm getMovie={movie} />;
     } else if (movieInFavoritesList && review) {
       showReview = (
-        <ReviewText review={review} removeReview={this.props.removeReview} />
+        <ReviewText
+          movie={this.props.movie}
+          user={this.props.user.user}
+          review={review}
+          setReview={this.props.setReview}
+        />
       );
     } else {
       showReview = null;
@@ -75,5 +79,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { addFavorites, removeFavorites, addReview, removeReview }
+  { setReview }
 )(MovieItem);
