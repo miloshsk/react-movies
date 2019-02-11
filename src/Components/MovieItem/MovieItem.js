@@ -3,9 +3,9 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import ReviewText from "../ReviewText/ReviewText";
 import "./movie-item.sass";
 import connect from "react-redux/es/connect/connect";
-import history from "../../history";
 import { database } from "../../firebase/firebase";
 import { setReview } from "../../actions/actions";
+import { withRouter } from "react-router";
 
 class MovieItem extends Component {
   toggleFavorites = e => {
@@ -20,7 +20,7 @@ class MovieItem extends Component {
     e.currentTarget.classList.toggle("fav");
   };
   goBack = () => {
-    history.push(`/${this.props.match.params.list}`);
+    this.props.history.push(`/${this.props.match.params.list}`);
   };
   findInFavorites = movie => {
     return this.props.favorites.findIndex(item => {
@@ -77,7 +77,9 @@ const mapStateToProps = state => ({
   favorites: state.movies.favorites,
   user: state.user
 });
-export default connect(
-  mapStateToProps,
-  { setReview }
-)(MovieItem);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { setReview }
+  )(MovieItem)
+);

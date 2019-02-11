@@ -3,15 +3,13 @@ import { withRouter } from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import { userLogout } from "../../actions/userActions";
 import { menuToggle } from "../../actions/menuActions";
-import history from "../../history";
 import Burger from "../Burger/Burger";
 import Link from "../Link/Link";
-
 class Navigation extends Component {
   logOut = () => {
     this.props.userLogout();
     this.burgerToggle();
-    history.push(`/`);
+    this.props.history.push("/");
   };
   burgerToggle = () => {
     if (window.innerWidth < 640) {

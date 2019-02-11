@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
 import { userError } from "../../actions/userActions";
-import {base} from "../../firebase/firebase";
-import history from "../../history";
+import { base } from "../../firebase/firebase";
+import { withRouter } from "react-router";
 
 class SignUp extends Component {
   state = {
@@ -34,7 +34,7 @@ class SignUp extends Component {
           });
         })
         .then(() => {
-          history.push("/login");
+          this.props.history.push("/login");
         })
         .catch(error => {
           this.props.userError(error);
@@ -85,7 +85,9 @@ class SignUp extends Component {
 const mapStateToProps = state => ({
   error: state.user.error
 });
-export default connect(
-  mapStateToProps,
-  { userError }
-)(SignUp);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { userError }
+  )(SignUp)
+);

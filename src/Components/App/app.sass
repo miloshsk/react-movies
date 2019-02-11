@@ -14,7 +14,6 @@ ul
   margin: 0 auto
   max-width: 900px
   width: 100%
-  padding-top: 25px
   border-right: 3px solid #fff
   border-left: 3px solid #fff
   min-height: 100vh
@@ -22,16 +21,18 @@ ul
 .page-nav
   min-height: 80px
   margin-bottom: 25px
-  padding: 0 10px
+  padding: 25px 10px 0
   position: relative
 .menu
   display: flex
 .user-field
   position: absolute
   right: 35px
-  top: 10px
+  top: 35px
   font-size: 22px
 @media only screen and (max-width: 640px)
+  .user-field
+    top: 20px
   .menu
     position: fixed
     z-index: 5

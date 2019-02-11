@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./movie-search.sass";
 import { connect } from "react-redux";
 import { setSearchingResult } from "../../actions/actions";
-import history from "../../history";
+import { withRouter } from "react-router";
+
 class MoviesSearch extends Component {
   state = {
     searchingMovie: ""
@@ -18,7 +19,7 @@ class MoviesSearch extends Component {
     this.setState({
       searchingMovie: ""
     });
-    history.push("/movies");
+    this.props.history.push("/movies");
   };
   render() {
     return (
@@ -35,7 +36,9 @@ class MoviesSearch extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { setSearchingResult }
-)(MoviesSearch);
+export default withRouter(
+  connect(
+    null,
+    { setSearchingResult }
+  )(MoviesSearch)
+);

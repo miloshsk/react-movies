@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./login.sass";
 import connect from "react-redux/es/connect/connect";
 import { userLogin, userIsLogin, userError } from "../../actions/userActions";
-import {base} from "../../firebase/firebase";
-import history from "../../history";
+import { base } from "../../firebase/firebase";
+import { withRouter } from "react-router";
 
 class Login extends Component {
   state = {
@@ -33,7 +33,7 @@ class Login extends Component {
         this.props.userIsLogin();
       })
       .then(() => {
-        history.push("/");
+				this.props.history.push("/");
       })
       .catch(error => {
         this.props.userError(error);
@@ -76,7 +76,9 @@ const mapStateToProps = state => {
     error: state.user.error
   };
 };
-export default connect(
-  mapStateToProps,
-  { userLogin, userIsLogin, userError }
-)(Login);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { userLogin, userIsLogin, userError }
+  )(Login)
+);
