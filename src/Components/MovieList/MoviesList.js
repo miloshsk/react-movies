@@ -34,10 +34,10 @@ class MoviesList extends Component {
     const movies = this.createList(state, getMovieById, list);
     return (
       <Fragment>
-        <h2 style={{ textAlign: "center" }}>
-          {state[list].length} movies in {list}
-        </h2>
-        <ul className="movie-list">{movies}</ul>
+				<h2 style={{ textAlign: "center" }}>
+					{state[list].length} movies in {list}
+				</h2>
+				<ul className="movie-list">{movies}</ul>
       </Fragment>
     );
   }

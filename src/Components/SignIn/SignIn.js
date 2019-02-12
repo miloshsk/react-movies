@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import "./login.sass";
 import connect from "react-redux/es/connect/connect";
 import { userLogin, userIsLogin, userError } from "../../actions/userActions";
 import { base } from "../../firebase/firebase";
 import { withRouter } from "react-router";
 
-class Login extends Component {
+class SignIn extends Component {
   state = {
     user: {
       email: "",
@@ -33,7 +32,7 @@ class Login extends Component {
         this.props.userIsLogin();
       })
       .then(() => {
-				this.props.history.push("/");
+        this.props.history.push("/");
       })
       .catch(error => {
         this.props.userError(error);
@@ -44,7 +43,8 @@ class Login extends Component {
       <p className="warning-msg">{this.props.error.message}</p>
     ) : null;
     return (
-      <div>
+      <div className="app-form-wrapper">
+        <h2 style={{ textAlign: "center" }}>Sign in</h2>
         {error}
         <form className="user-form app-form" onSubmit={this.login}>
           <input
@@ -80,5 +80,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     { userLogin, userIsLogin, userError }
-  )(Login)
+  )(SignIn)
 );

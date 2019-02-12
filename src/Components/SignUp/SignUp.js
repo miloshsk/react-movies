@@ -46,8 +46,8 @@ class SignUp extends Component {
       <p className="warning-msg">{this.props.error.message}</p>
     ) : null;
     return (
-      <div>
-        <h2 style={{ textAlign: "center" }}>Registration</h2>
+      <div className="app-form-wrapper">
+        <h2 style={{ textAlign: "center" }}>Sign up</h2>
         {error}
         <form className="signup-form" onSubmit={this.signup}>
           <input

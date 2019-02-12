@@ -16,7 +16,7 @@ export const fetchMovies = movie => dispatch => {
         type: FETCH_MOVIES,
         payload: movies ? movies : []
       })
-    );
+    )
 };
 export const fetchFavorites = user => dispatch => {
   database

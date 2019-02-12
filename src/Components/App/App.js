@@ -5,7 +5,7 @@ import MoviesList from "../MovieList/MoviesList";
 import MovieItem from "../MovieItem/MovieItem";
 import Navigation from "../Navigation/Navigation";
 import Error from "../Error/Error";
-import Login from "../Login/Login";
+import Login from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 
 import "normalize.css";
@@ -41,7 +41,7 @@ class App extends Component {
             exact
             render={props => <MovieItem {...props} />}
           />
-          <Route path="/login" exact component={Login} />
+          <Route path="/sign-in" exact component={Login} />
           <Route path="/sign-up" exact component={SignUp} />
           <Route component={Error} />
         </Switch>

@@ -22,11 +22,14 @@ class Navigation extends Component {
     const isUserLoggedIn = this.props.userState.isLoggedIn;
     const showProfile = isUserLoggedIn ? (
       <button className="btn btn-link" onClick={this.logOut}>
-        Log out
+        Sign out
       </button>
     ) : (
-      <Link to="/login" label={"Login"} />
+      <Link to="/sign-in" label={"Sign in"} />
     );
+    const showSignUp = !isUserLoggedIn ? (
+      <Link to="/sign-up" label={"Sign up"} />
+    ) : null;
     const showFavButton = isUserLoggedIn ? (
       <Link to="/favorites" label={"Favorites"} />
     ) : null;
@@ -39,7 +42,7 @@ class Navigation extends Component {
           <Link to="/" label={"Home"} />
           <Link to="/movies" label={"Movies"} />
           {showFavButton}
-          <Link to="/sign-up" label={"Sign up"} />
+          {showSignUp}
           {showProfile}
         </ul>
         {showUser}
