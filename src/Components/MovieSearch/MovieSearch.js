@@ -23,16 +23,18 @@ class MoviesSearch extends Component {
   };
   render() {
     return (
-      <form className="search-form" onSubmit={this.searchMovie}>
-        <input
-          className="search-form__input app-input"
-          placeholder="Enter a movie"
-          onChange={this.typeMovie}
-          value={this.state.searchingMovie}
-          type="text"
-        />
-        <button className="btn btn-form search-form__submit">Search</button>
-      </form>
+      <div className="app-form-wrapper">
+        <form className="search-form" onSubmit={this.searchMovie}>
+          <input
+            className="search-form__input app-input"
+            placeholder="Enter a movie"
+            onChange={this.typeMovie}
+            value={this.state.searchingMovie}
+            type="text"
+          />
+          <button className="btn btn-form search-form__submit">Search</button>
+        </form>
+      </div>
     );
   }
 }

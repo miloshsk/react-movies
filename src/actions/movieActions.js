@@ -3,11 +3,12 @@ import {
   GET_MOVIE,
   FETCH_MOVIES,
   SET_SEARCHING_MOVIE,
-  FETCH_FAVORITES
+  FETCH_FAVORITES,
+  LOADING
 } from "./types";
 import { database } from "../firebase/firebase";
 
-export const fetchMovies = movie => dispatch => {
+export const fetchMovies = (movie, loading) => dispatch => {
   fetch(`https://www.omdbapi.com/?apikey=e99e23f5&s=${movie}`)
     .then(res => res.json())
     .then(movs => movs.Search)
@@ -16,9 +17,15 @@ export const fetchMovies = movie => dispatch => {
         type: FETCH_MOVIES,
         payload: movies ? movies : []
       })
+    )
+    .then(() =>
+      dispatch({
+        type: LOADING,
+        payload: loading
+      })
     );
 };
-export const fetchFavorites = user => dispatch => {
+export const fetchFavorites = (user, loading) => dispatch => {
   database
     .ref(`favorites/${user}`)
     .once("value")
@@ -33,7 +40,13 @@ export const fetchFavorites = user => dispatch => {
         type: FETCH_FAVORITES,
         payload: res
       });
-    });
+    })
+    .then(() =>
+      dispatch({
+        type: LOADING,
+        payload: loading
+      })
+    );
 };
 export const setSearchingResult = movie => dispatch => {
   dispatch({

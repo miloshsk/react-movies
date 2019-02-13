@@ -12,6 +12,7 @@ ul
   margin: 0
 #root
   margin: 0 auto
+  padding-top: 25px
   max-width: 900px
   width: 100%
   border-right: 3px solid #fff
@@ -19,22 +20,22 @@ ul
   min-height: 100vh
   position: relative
 .page-nav
-  min-height: 80px
+  min-height: 40px
+  padding: 0 10px
   margin-bottom: 25px
-  padding: 25px 10px 0
   position: relative
 .menu
   display: flex
 .app-form-wrapper
-  padding-top: 15px
+  padding-top: 20px
   position: relative
 .user-field
   position: absolute
   right: 35px
-  top: 20px
+  top: 0
   font-size: 22px
 .warning-msg
-  font-size: 22px
+  font-size: 18px
   text-align: center
   color: #A6451E
   position: absolute
@@ -43,6 +44,8 @@ ul
   left: 0
   margin: 0
 @media only screen and (max-width: 640px)
+  .page-nav
+    padding: 0
   .menu
     position: fixed
     z-index: 5

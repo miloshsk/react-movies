@@ -12,7 +12,7 @@ import { showSpinner } from "../../actions/actions";
 
 class MoviesList extends Component {
   componentDidMount() {
-    showSpinner(true);
+    this.props.showSpinner(true);
     const {
       fetchFavorites,
       userIsLoggedIn,
