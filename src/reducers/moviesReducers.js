@@ -19,7 +19,8 @@ export default function(state = initialState, action) {
     case FETCH_MOVIES:
       return {
         ...state,
-        movies: action.payload
+        movies: action.payload,
+        loading: false
       };
     case SET_SEARCHING_MOVIE:
       return {
@@ -34,7 +35,8 @@ export default function(state = initialState, action) {
     case FETCH_FAVORITES:
       return {
         ...state,
-        favorites: action.payload
+        favorites: action.payload,
+        loading: false
       };
     case SET_REVIEW:
       return {

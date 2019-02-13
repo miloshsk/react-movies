@@ -7,7 +7,6 @@ import Navigation from "../Navigation/Navigation";
 import Error from "../Error/Error";
 import Login from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
-
 import "normalize.css";
 import "./app.sass";
 import "./buttons.sass";

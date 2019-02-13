@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
+import Spinner from ".././Spinner/Spinner";
 import { userLogin, userIsLogin, userError } from "../../actions/userActions";
+import { showSpinner } from "../../actions/actions";
 import { base } from "../../firebase/firebase";
 import { withRouter } from "react-router";
 
@@ -19,6 +21,7 @@ class SignIn extends Component {
 
   login = e => {
     e.preventDefault();
+    this.props.showSpinner(true);
     base
       .auth()
       .signInWithEmailAndPassword(
@@ -32,9 +35,13 @@ class SignIn extends Component {
         this.props.userIsLogin();
       })
       .then(() => {
+        this.props.showSpinner(false);
+      })
+      .then(() => {
         this.props.history.push("/");
       })
       .catch(error => {
+        this.props.showSpinner(false);
         this.props.userError(error);
       });
   };
@@ -42,6 +49,9 @@ class SignIn extends Component {
     const error = this.props.error.isWarning ? (
       <p className="warning-msg">{this.props.error.message}</p>
     ) : null;
+    if (this.props.loading) {
+      return <Spinner />;
+    }
     return (
       <div className="app-form-wrapper">
         <h2 style={{ textAlign: "center" }}>Sign in</h2>
@@ -73,12 +83,19 @@ class SignIn extends Component {
 }
 const mapStateToProps = state => {
   return {
-    error: state.user.error
+    error: state.user.error,
+    loading: state.loading.loading
   };
+};
+const mapDispatchToProps = {
+  userLogin,
+  userIsLogin,
+  userError,
+  showSpinner
 };
 export default withRouter(
   connect(
     mapStateToProps,
-    { userLogin, userIsLogin, userError }
+    mapDispatchToProps
   )(SignIn)
 );

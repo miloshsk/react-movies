@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import reducers from  './reducers';
+import moviesReducers from './moviesReducers';
 import userReducers from  './userReducers';
 import menuReducers from  './menuReducers';
+import loadingReducers from './loadingReducers';
 
 export default combineReducers({
-	movies: reducers,
+	movies: moviesReducers,
 	user: userReducers,
-	menu: menuReducers
+	menu: menuReducers,
+	loading: loadingReducers
 });

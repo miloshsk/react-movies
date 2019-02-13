@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./movie-search.sass";
 import { connect } from "react-redux";
-import { setSearchingResult } from "../../actions/actions";
+import { setSearchingResult } from "../../actions/movieActions";
 import { withRouter } from "react-router";
 
 class MoviesSearch extends Component {
@@ -36,9 +36,10 @@ class MoviesSearch extends Component {
     );
   }
 }
+const mapDispatchToProps = { setSearchingResult };
 export default withRouter(
   connect(
     null,
-    { setSearchingResult }
+    mapDispatchToProps
   )(MoviesSearch)
 );

@@ -29,9 +29,10 @@ class Link extends Component {
 const mapStateToProps = state => ({
   isMenuOpen: state.menu.isMenuOpen
 });
+const mapDispatchToProps = { menuToggle };
 export default withRouter(
   connect(
     mapStateToProps,
-    { menuToggle }
+    mapDispatchToProps
   )(Link)
 );

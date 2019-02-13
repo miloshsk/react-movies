@@ -18,8 +18,8 @@ class Navigation extends Component {
     }
   };
   render() {
-    const userName = this.props.userState.user;
-    const isUserLoggedIn = this.props.userState.isLoggedIn;
+    const userName = this.props.userName;
+    const isUserLoggedIn = this.props.userRsLoggedIn;
     const showProfile = isUserLoggedIn ? (
       <button className="btn btn-link" onClick={this.logOut}>
         Sign out
@@ -55,12 +55,14 @@ class Navigation extends Component {
   }
 }
 const mapStateToProps = state => ({
-  userState: state.user,
+  userName: state.user.userName,
+  userRsLoggedIn: state.user.isLoggedIn,
   isMenuOpen: state.menu.isMenuOpen
 });
+const mapDispatchToProps = { userLogout, menuToggle };
 export default withRouter(
   connect(
     mapStateToProps,
-    { userLogout, menuToggle }
+    mapDispatchToProps
   )(Navigation)
 );

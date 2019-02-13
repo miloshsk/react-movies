@@ -8,3 +8,4 @@ export const USER_IS_LOGGED_IN = "USER_IS_LOGGED_IN";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const MENU_TOGGLE = "MENU_TOGGLE";
 export const FETCH_FAVORITES = "FETCH_FAVORITES";
+export const LOADING = "LOADING";

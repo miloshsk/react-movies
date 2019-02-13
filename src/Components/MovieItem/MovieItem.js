@@ -4,22 +4,22 @@ import ReviewText from "../ReviewText/ReviewText";
 import "./movie-item.sass";
 import connect from "react-redux/es/connect/connect";
 import { database } from "../../firebase/firebase";
-import { setReview } from "../../actions/actions";
+import { setReview } from "../../actions/movieActions";
 import { withRouter } from "react-router";
 
 class MovieItem extends Component {
   toggleFavorites = e => {
-    const { user, movie } = this.props;
+    const { userName, movie } = this.props;
     if (e.currentTarget.classList.contains("fav")) {
-      database.ref(`favorites/${user.user}/${movie.Title}`).remove();
+      database.ref(`favorites/${userName}/${movie.Title}`).remove();
     } else {
-      database.ref(`favorites/${user.user}/${movie.Title}`).set({
+      database.ref(`favorites/${userName}/${movie.Title}`).set({
         ...movie
       });
     }
     e.currentTarget.classList.toggle("fav");
   };
-  goBack = () => {
+  return = () => {
     this.props.history.push(`/${this.props.match.params.list}`);
   };
   findInFavorites = movie => {
@@ -31,7 +31,7 @@ class MovieItem extends Component {
     const { movie } = this.props;
     const { Title, Year, Poster, review } = movie;
     const movieInFavoritesList = this.findInFavorites(movie) !== -1;
-    const showFavoriteBtn = this.props.user.isLoggedIn ? (
+    const showFavoriteBtn = this.props.userIsLoggedIn ? (
       <button
         onClick={this.toggleFavorites}
         className={`btn btn-favorites ${movieInFavoritesList ? "fav" : " "}`}
@@ -50,7 +50,7 @@ class MovieItem extends Component {
       showReview = (
         <ReviewText
           movie={this.props.movie}
-          user={this.props.user.user}
+          user={this.props.userName}
           review={review}
           setReview={this.props.setReview}
         />
@@ -63,7 +63,7 @@ class MovieItem extends Component {
         <h2 className="movie__title">{Title}</h2>
         <p className="movie__year">{Year}</p>
         <img className="movie__poster" src={Poster} alt="" />
-        <button className="btn btn-return" onClick={this.goBack}>
+        <button className="btn btn-return" onClick={this.return}>
           Return
         </button>
         {showReview}
@@ -75,7 +75,8 @@ class MovieItem extends Component {
 const mapStateToProps = state => ({
   movie: state.movies.movie,
   favorites: state.movies.favorites,
-  user: state.user
+  userName: state.user.userName,
+  userIsLoggedIn: state.user.isLoggedIn
 });
 export default withRouter(
   connect(

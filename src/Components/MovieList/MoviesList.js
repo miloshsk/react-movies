@@ -1,15 +1,28 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import Spinner from ".././Spinner/Spinner";
 import "./movie-list.sass";
 import connect from "react-redux/es/connect/connect";
-import { getMovie, fetchMovies, fetchFavorites } from "../../actions/actions";
+import {
+  getMovie,
+  fetchMovies,
+  fetchFavorites
+} from "../../actions/movieActions";
+import { showSpinner } from "../../actions/actions";
 
 class MoviesList extends Component {
   componentDidMount() {
-    const {fetchFavorites, user, fetchMovies, state} = this.props;
-		fetchMovies(state.searchingMovie);
-		if(user.isLoggedIn) {
-			fetchFavorites(user.user);
+    showSpinner(true);
+    const {
+      fetchFavorites,
+      userIsLoggedIn,
+      userName,
+      fetchMovies,
+      movies
+    } = this.props;
+    fetchMovies(movies.searchingMovie);
+    if (userIsLoggedIn) {
+      fetchFavorites(userName);
     }
   }
   createList = (moviesList, getMovieById, list) => {
@@ -30,25 +43,36 @@ class MoviesList extends Component {
     });
   };
   render() {
-    const { state, getMovieById, list } = this.props;
-    const movies = this.createList(state, getMovieById, list);
+    if (this.props.loading) {
+      return <Spinner />;
+    }
+    const { movies, getMovieById, list } = this.props;
+    const moviesList = this.createList(movies, getMovieById, list);
     return (
       <Fragment>
-				<h2 style={{ textAlign: "center" }}>
-					{state[list].length} movies in {list}
-				</h2>
-				<ul className="movie-list">{movies}</ul>
+        <h2 style={{ textAlign: "center" }}>
+          {movies[list].length} movies in {list}
+        </h2>
+        <ul className="movie-list">{moviesList}</ul>
       </Fragment>
     );
   }
 }
 const mapStateToProps = state => ({
-  state: state.movies,
-  user: state.user
+  movies: state.movies,
+  userName: state.user.userName,
+  userIsLoggedIn: state.user.isLoggedIn,
+  loading: state.loading.loading
 });
+const mapDispatchToProps = {
+  getMovie,
+  fetchMovies,
+  fetchFavorites,
+  showSpinner
+};
 export default withRouter(
   connect(
     mapStateToProps,
-    { getMovie, fetchMovies, fetchFavorites }
+    mapDispatchToProps
   )(MoviesList)
 );
