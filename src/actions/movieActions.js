@@ -8,7 +8,7 @@ import {
 } from "./types";
 import { database } from "../firebase/firebase";
 
-export const fetchMovies = (movie, loading) => dispatch => {
+export const fetchMovies = movie => dispatch => {
   fetch(`https://www.omdbapi.com/?apikey=e99e23f5&s=${movie}`)
     .then(res => res.json())
     .then(movs => movs.Search)
@@ -21,11 +21,11 @@ export const fetchMovies = (movie, loading) => dispatch => {
     .then(() =>
       dispatch({
         type: LOADING,
-        payload: loading
+        payload: false
       })
     );
 };
-export const fetchFavorites = (user, loading) => dispatch => {
+export const fetchFavorites = user => dispatch => {
   database
     .ref(`favorites/${user}`)
     .once("value")
@@ -44,11 +44,11 @@ export const fetchFavorites = (user, loading) => dispatch => {
     .then(() =>
       dispatch({
         type: LOADING,
-        payload: loading
+        payload: false
       })
     );
 };
-export const setSearchingResult = movie => dispatch => {
+export const setSearchingMovie = movie => dispatch => {
   dispatch({
     type: SET_SEARCHING_MOVIE,
     payload: movie

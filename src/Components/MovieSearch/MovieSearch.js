@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./movie-search.sass";
 import { connect } from "react-redux";
-import { setSearchingResult } from "../../actions/movieActions";
+import { setSearchingMovie } from "../../actions/movieActions";
 import { withRouter } from "react-router";
 
 class MoviesSearch extends Component {
@@ -15,7 +15,7 @@ class MoviesSearch extends Component {
   };
   searchMovie = e => {
     e.preventDefault();
-    this.props.setSearchingResult(this.state.searchingMovie);
+    this.props.setSearchingMovie(this.state.searchingMovie);
     this.setState({
       searchingMovie: ""
     });
@@ -38,7 +38,7 @@ class MoviesSearch extends Component {
     );
   }
 }
-const mapDispatchToProps = { setSearchingResult };
+const mapDispatchToProps = { setSearchingMovie };
 export default withRouter(
   connect(
     null,

@@ -5,6 +5,7 @@ import { userLogout } from "../../actions/userActions";
 import { menuToggle } from "../../actions/menuActions";
 import Burger from "../Burger/Burger";
 import Link from "../Link/Link";
+
 class Navigation extends Component {
   logOut = () => {
     this.props.userLogout();

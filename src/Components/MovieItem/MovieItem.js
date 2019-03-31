@@ -5,7 +5,7 @@ import "./movie-item.sass";
 import connect from "react-redux/es/connect/connect";
 import { database } from "../../firebase/firebase";
 import { setReview } from "../../actions/movieActions";
-import { withRouter } from "react-router";
+import { Redirect, withRouter } from "react-router";
 
 class MovieItem extends Component {
   toggleFavorites = e => {
@@ -29,6 +29,9 @@ class MovieItem extends Component {
   };
   render() {
     const { movie } = this.props;
+    if (!movie) {
+      return <Redirect to="/" />;
+    }
     const { Title, Year, Poster, review } = movie;
     const movieInFavoritesList = this.findInFavorites(movie) !== -1;
     const showFavoriteBtn = this.props.userIsLoggedIn ? (

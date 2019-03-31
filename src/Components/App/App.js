@@ -31,7 +31,7 @@ class App extends Component {
               this.props.isLoggedIn ? (
                 <MoviesList {...props} list={"favorites"} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/sign-in" />
               )
             }
           />
@@ -51,6 +51,7 @@ class App extends Component {
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn
 });
+
 export default withRouter(
   connect(
     mapStateToProps,
